@@ -4,6 +4,17 @@
   padding: 2rem;
   text-align: center;
 }
+*{
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    font-family: serif,Arial;
+  }
+
+  main{
+    min-height: 75vh;
+    overflow: scroll;
+  }
+
 
 .logo {
   height: 6em;
@@ -33,10 +44,95 @@
   }
 }
 
-.card {
-  padding: 2em;
+ 
+
+ /* Header Section start here */
+.cart{
+  background-color:#C6824C ;
+}
+.header{
+  display: flex; 
+  background-color: #EFEBE7;
+  position: sticky;
+  border-radius: 10px;
+  width: 100%; 
+  height: 10rem;
+  top:1px;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+
+}
+.img__logo{
+ width: 150px;
+ height:100px;
+ margin-top: 1rem;
+ object-fit:cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+}
+nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+.nav__link {
+  color: black;
+  text-decoration: solid;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+.nav__link:hover {
+  color: #C6824C;
+  text-decoration: overline;
+}
+ /* Header Section End */
+
+
+/* Footer Section Start Here */
+.footer{
+  background-color:#EFEBE7 ;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__left{
+  display: flex;
+  justify-content: center;
+ gap: 5px;
 }
 
-.read-the-docs {
-  color: #888;
+.footer__left a{
+  text-decoration: none;
+  color: #272E26;
 }
+.footer__right{
+  color: #272E26;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+.fa-brands{
+  color: #272E26;
+}
+/* Footer Section End */
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* colors    EFEBE7   FBF7F1   EEEAE6     474543  C6824C */
