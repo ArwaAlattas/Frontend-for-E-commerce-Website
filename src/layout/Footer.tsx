@@ -1,38 +1,51 @@
-import React from "react"
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <>
-    <footer className="footer">
+    <div className="footer">
+    <footer className="footer-top">
       <div className="footer__left">
-        <a href="#" title="About Us">
-          About Us
-        </a>
-        <a href="milto:contact.html" title="ContactPage">
-          Contact Us
-        </a>
+       
+        <Link to={"/shippingInfo" }>
+        Shipping and returns
+        </Link>
+        <Link to={'/terms' }>
+        Terms, Conditions and Privacy
+        </Link>
+        <Link to="/about">About Us</Link>
       </div>
-      <div>
+      <div className="footer__middle" >
         <img className="img__logo" alt="logo" src="src/images/logo.png" />
       </div>
       <div className="footer__right">
+        <h2> CONTACT US </h2>
+        <hr className="footer__line" />
+     <div className='contact-icons'>
+     <a title="X" href="https://www.X.com">
+          <XIcon/>
+        </a>
         <a title="facebook" href="https://www.facebook.com">
-          <i className="fa-brands fa-facebook"></i>
+          <FacebookIcon/>
         </a>
         <a title="whatsapp" href="https://web.whatsapp.com">
-          <i className="fa-brands fa-whatsapp"></i>
+          <WhatsAppIcon/>
         </a>
         <a title="youtube" href="https://www.youtube.com">
-          <i className="fa-brands fa-youtube"></i>
+          <YouTubeIcon/>
         </a>
         <a title="telegram" href="https://telegram.org">
-          <i className="fa-brands fa-telegram"></i>
+          <TelegramIcon/>
         </a>
+     </div>
       </div>
-      
     </footer>
     <span>Copyright 2024 © Arwa Alattas. All rights reserved.</span>
-    </>
+    </div>
   )
 }
 

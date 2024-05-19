@@ -24,7 +24,27 @@ export type Category = {
   createdAt:string
   products:Product[]
 }
+export type User = {
+  username: string
+  email: string
+  firstName: string
+  lastName: string
+  phoneNumber: string
+  address:string
+  isAdmin?:string
+  isBanned?:string
+  birthDate?:string
+  createdAt?: string
+}
+export type UserState = { 
+  error: null | string
+  isLoading: boolean
+}
 
+export type LoginFormData = {
+  email: string
+  password: string
+}
 // export type Cart = {
 //   cartID: string
 // }

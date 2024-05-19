@@ -1,0 +1,30 @@
+.terms-container {
+ text-align: start;
+ display: flex;
+ flex-direction: column;
+gap: 1rem;
+margin: 1rem;
+}
+.terms-container h1{
+    text-align: center;
+    margin: 1rem;
+}
+.terms-container h2,h3{
+  color: #c6824c;
+  font-size: large;
+}
+.about-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.about-container p{
+  max-width: 50%;
+  color: #c6824c;
+  font-size: large;
+}

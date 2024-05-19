@@ -87,9 +87,11 @@ margin: 0.5rem;
  .search-bar{
   outline-color: #C6824C;
   border-radius: 0.5rem;
-  border-color: #C6824C;
-  border-width: 0.1rem;
-  padding: 0.2rem;
+  border-color: #EFEBE7;
+  background-color: white;
+  border-width: 0.01rem;
+  width: 100%;
+  padding: 0.6rem;
  }
  .action{
   width: 90%;

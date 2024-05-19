@@ -29,28 +29,8 @@ export const fetchProducts = createAsyncThunk(
       await api.get(`/products?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&isAscending=${isAscending}`)
       // res.data.data.items.$values   ?pageNumber=1&pageSize=2     sortBy=name&isAscending=true
       return response.data
-      // if(keyword.length > 0){
-      //   const response = await api.get(`/products/search?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}`)
-      //   return response.data
-      // }else{
-      //  if(sortBy.length > 0){
-      //   const res = await api.get(`products/search?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=price&isAscending=false`);
-      //   return res.data
-      //  }
-      //  const response = await api.get(`/products?pageNumber=${pageNumber}&pageSize=${pageSize}`) 
-      //  return response.data
-    //  }
   }
 )
-// export const searchProduct = createAsyncThunk(
-//   "products/search",
-//   async ( keyword :string) => {
-//     const response = await api.get(`/products/search?keyword=${keyword}`)
-//     // res.data.data.items.$values  http://localhost:5343/api/products/search?keyword=k
-//     console.log(response.data)
-//     return response.data
-//   }
-// )
 
 export const fetchProductById = createAsyncThunk(
   "products/fetchProductById",

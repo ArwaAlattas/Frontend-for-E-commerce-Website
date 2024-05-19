@@ -14,7 +14,7 @@ const Products = () => {
   )
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize, setPageSize] = useState(3)
+  const [pageSize, setPageSize] = useState(5)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState("name")
   const [isAscending,setIsAscending] = useState("true")
@@ -55,7 +55,7 @@ const Products = () => {
   return (
     <div className="container">
       <PageTitle title="Products" />
-      <h1 className="text-2xl uppercase mb-5">Products</h1>
+      <h1 className="text-2xl uppercase mb-1">Products</h1>
       {isLoading && <p>Loading ... </p>}
       {error && <p className="text-red-500">Error{error}</p>}
       <div className="action ">
