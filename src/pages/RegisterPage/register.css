@@ -1,0 +1,19 @@
+/* .register{
+    height:75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    align-content: center;
+    align-items: center;
+    width: max-content;
+} */
+.error{
+text-align: start;
+color: #D3302F;
+}
+.image-field{
+ width: 100%;
+}
+
+/* 474543  C6824C  */

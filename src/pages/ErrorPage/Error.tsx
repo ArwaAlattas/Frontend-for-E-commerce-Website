@@ -1,6 +1,6 @@
 import React from "react"
 
-import styles from "../pages/error.module.css"
+import styles from "./error.module.css"
 import PageTitle from "@/components/PageTitle"
 
 const Error = () => {

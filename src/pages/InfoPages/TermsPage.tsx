@@ -1,5 +1,5 @@
 import React from 'react'
-import "../pages/terms.css"
+import "./terms.css"
 function TermsPage() {
   return (
     <div className='terms-container'>

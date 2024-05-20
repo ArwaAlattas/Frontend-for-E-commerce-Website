@@ -26,6 +26,7 @@ export type Category = {
 }
 export type User = {
   username: string
+  imgUrl?: string
   email: string
   firstName: string
   lastName: string

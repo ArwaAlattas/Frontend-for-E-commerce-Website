@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import PageTitle from "@/components/PageTitle"
-import "../pages/productDetails.css"
+import "./productDetails.css"
 import { AppDispatch, RootState } from "@/tookit/store"
 import { fetchProductById } from "@/tookit/slices/productSlice"
 

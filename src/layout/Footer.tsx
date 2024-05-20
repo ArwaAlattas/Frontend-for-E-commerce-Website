@@ -10,7 +10,6 @@ function Footer() {
     <div className="footer">
     <footer className="footer-top">
       <div className="footer__left">
-       
         <Link to={"/shippingInfo" }>
         Shipping and returns
         </Link>
@@ -19,9 +18,9 @@ function Footer() {
         </Link>
         <Link to="/about">About Us</Link>
       </div>
-      <div className="footer__middle" >
-        <img className="img__logo" alt="logo" src="src/images/logo.png" />
-      </div>
+   
+        <img className="img__logo" alt="logo"  src="src/images/logo.png" />
+      
       <div className="footer__right">
         <h2> CONTACT US </h2>
         <hr className="footer__line" />
@@ -44,7 +43,12 @@ function Footer() {
      </div>
       </div>
     </footer>
-    <span>Copyright 2024 © Arwa Alattas. All rights reserved.</span>
+    <span> {'Copyright © '}
+      <Link color="gray" to="https://github.com/ArwaAlattas">
+        Arwa Alattas
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}</span>
     </div>
   )
 }

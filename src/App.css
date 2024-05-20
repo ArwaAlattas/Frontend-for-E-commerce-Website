@@ -12,6 +12,7 @@
 
 main {
   min-height: 75vh;
+  width: 100%;
   overflow: scroll;
 }
 
@@ -44,13 +45,11 @@ main {
 }
 
 /* Header Section start here */
-.cart {
-  background-color: #c6824c;
-}
+
 .header {
   display: flex;
   background-color: #efebe7;
-  position: sticky;
+  position: relative;
   border-radius: 10px;
   width: 100%;
   height: 10rem;
@@ -97,25 +96,27 @@ nav {
   margin-bottom:1rem ; 
   position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
-  gap: 4rem;
+  /* gap: 5rem; */
   border-radius: 3rem;
   padding: 2rem;
+
 }
 @media screen and (max-width: 1024px) {
   .footer-top {
     flex-direction: column;
   }
 }
-.footer__middle{
-  display: flex;
+/* .footer__middle{
+   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #c6824c;
-}
+    justify-content: center;
+  align-content: center;
+  /* align-items: center; */
+/* } */
+
 .footer__left {
   display: flex;
   flex-direction: column;
@@ -123,7 +124,6 @@ nav {
   align-items: center;
   align-content: center;
   gap: 0.5rem;
- 
 }
 .footer__left a{
  text-decoration: underline;
@@ -147,9 +147,7 @@ nav {
   justify-content: space-evenly;
   gap: 10px;
 }
-.fa-brands {
-  color: #272e26;
-}
+
 /* Footer Section End */
 
 /* colors    EFEBE7   FBF7F1   EEEAE6     474543  C6824C */
