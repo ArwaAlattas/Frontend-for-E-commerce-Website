@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import "./products.css"
 import PageTitle from "@/components/PageTitle"
 import SingleProduct from "@/components/SingleProduct"
-import { AppDispatch, RootState } from "@/tookit/store"
-import { fetchProducts } from "@/tookit/slices/productSlice"
+import { AppDispatch, RootState } from "@/redux/store"
+import { fetchProducts } from "@/redux/slices/productSlice"
 import { Button } from "@/components/ui/button"
 
 const Products = () => {
@@ -17,40 +17,39 @@ const Products = () => {
   const [pageSize, setPageSize] = useState(5)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState("name")
-  const [isAscending,setIsAscending] = useState("true")
+  const [isAscending, setIsAscending] = useState("true")
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchProducts({ pageNumber, pageSize, keyword, sortBy ,isAscending}))
+      await dispatch(fetchProducts({ pageNumber, pageSize, keyword, sortBy, isAscending }))
     }
     fetchData()
-  }, [pageNumber, keyword, sortBy,isAscending])
+  }, [pageNumber, keyword, sortBy, isAscending])
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault;
+    e.preventDefault
     setKeyword(e.target.value)
   }
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-   switch(e.target.value){
-    case "NameDEC": 
-    setSortBy("Name") 
-    setIsAscending("false")
-    break
-    case "NameASC":
-      setSortBy("Name") 
-      setIsAscending("true")
-    break
-    case "PriceASC": 
-    setSortBy("Price") 
-    setIsAscending("true")
-    break
-    case "PriceDEC":
-      setSortBy("Price") 
-      setIsAscending("false")
-    break
-   }
+    switch (e.target.value) {
+      case "NameDEC":
+        setSortBy("Name")
+        setIsAscending("false")
+        break
+      case "NameASC":
+        setSortBy("Name")
+        setIsAscending("true")
+        break
+      case "PriceASC":
+        setSortBy("Price")
+        setIsAscending("true")
+        break
+      case "PriceDEC":
+        setSortBy("Price")
+        setIsAscending("false")
+        break
+    }
     // setIsAscending(e.target.value)
-
   }
   return (
     <div className="container">
@@ -61,7 +60,7 @@ const Products = () => {
       <div className="action ">
         <div>
           <input
-          className="search-bar"
+            className="search-bar"
             type="text"
             placeholder="Search Products"
             value={keyword}
@@ -69,17 +68,22 @@ const Products = () => {
           />
         </div>
         <div>
-          <select className="sort-by" name="Sort" defaultValue={'DEFAULT'} onChange={handleSortChange}>
-          <option value="DEFAULT" disabled hidden>
+          <select
+            className="sort-by"
+            name="Sort"
+            defaultValue={"DEFAULT"}
+            onChange={handleSortChange}
+          >
+            <option value="DEFAULT" disabled hidden>
               Sort
             </option>
             <optgroup label="By Name">
-              <option  value="NameASC" >A to Z</option>
-              <option value="NameDEC" >Z to A </option>
+              <option value="NameASC">A to Z</option>
+              <option value="NameDEC">Z to A </option>
             </optgroup>
             <optgroup label="By Price">
-              <option  value="PriceDEC" >High to Low</option>
-              <option value="PriceASC" >Low to High</option>
+              <option value="PriceDEC">High to Low</option>
+              <option value="PriceASC">Low to High</option>
             </optgroup>
           </select>
         </div>
@@ -98,8 +102,7 @@ const Products = () => {
           Previous
         </Button>
         {Array.from({ length: totalPages }, (_, index) => (
-          <Button key={index} onClick={() => setPageNumber(index + 1)
-         }>
+          <Button key={index} onClick={() => setPageNumber(index + 1)}>
             {index + 1}
           </Button>
         ))}

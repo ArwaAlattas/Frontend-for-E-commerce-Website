@@ -15,11 +15,11 @@ import { useDispatch } from "react-redux"
 import { useState } from "react"
 
 import "./register.css"
-import { AppDispatch } from "@/tookit/store"
-import { registerUser } from "@/tookit/slices/userSlice"
+import { AppDispatch } from "@/redux/store"
+import { registerUser } from "@/redux/slices/userSlice"
 import { toastError, toastSuccess } from "@/utils/toast"
 import { uploadImageToCloudinary } from "@/utils/cloudinary"
-
+import PageTitle from "@/components/PageTitle"
 
 type FormData = {
   username: string
@@ -57,24 +57,20 @@ export default function SignUp() {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      console.log(data)
       let imageUrl = " "
       if (data.imgUrl && data.imgUrl.length > 0) {
         const file = data.imgUrl[0]
-        console.log(file)
         imageUrl = await uploadImageToCloudinary(file)
-        console.log("kkkkkkkkkkkk", imageUrl)
       }
 
       const userData = {
         ...data,
         imgUrl: imageUrl
       }
-      console.log("dddd", userData)
+
       const response = await dispatch(registerUser(userData))
       console.log("Response from Register:" + response)
       toastSuccess(response.payload.data)
-
       navigate("/login")
     } catch (error: any) {
       toastError(error.message || "Registration failed")
@@ -90,6 +86,7 @@ export default function SignUp() {
   }
   return (
     <ThemeProvider theme={theme}>
+<PageTitle title="Register" />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -182,7 +179,6 @@ export default function SignUp() {
                   label="address"
                   type="text"
                   id="address"
-          
                   autoComplete="address"
                 />
               </Grid>
@@ -229,10 +225,10 @@ export default function SignUp() {
                   })}
                   id="Image"
                   required
-                  accept="image/*" 
+                  accept="image/*"
                   onChange={handleImageChange}
                 />
-                {errors.imgUrl && <p className="error">{errors.imgUrl?.message}</p>} 
+                {errors.imgUrl && <p className="error">{errors.imgUrl?.message}</p>}
               </Grid>
               {imagePreview && (
                 <img className="image-preview" src={imagePreview} alt="imagePreview"></img>
