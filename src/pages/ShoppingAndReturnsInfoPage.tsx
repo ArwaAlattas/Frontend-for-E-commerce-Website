@@ -1,5 +1,5 @@
 import React from 'react'
-import "./terms.css"
+import "../styles/terms.css"
 function ShoppingAndReturnsInfo() {
   return (
     <div className='terms-container'>

@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 
 import PageTitle from "@/components/PageTitle"
-import "./productDetails.css"
-import { AppDispatch, RootState } from "@/redux/store"
+import "../styles/productDetails.css"
+import { AppDispatch } from "@/redux/store"
 import { fetchProductById } from "@/redux/slices/productSlice"
+import useProductState from "@/hooks/ProductState"
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>()
-  const { product, error, isLoading } = useSelector((state: RootState) => state.productR)
+  const { isLoading, error, product } = useProductState()
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {

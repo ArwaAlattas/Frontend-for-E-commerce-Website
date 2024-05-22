@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
-import "./products.css"
+import "../styles/products.css"
 import PageTitle from "@/components/PageTitle"
 import SingleProduct from "@/components/SingleProduct"
-import { AppDispatch, RootState } from "@/redux/store"
+import { AppDispatch } from "@/redux/store"
 import { fetchProducts } from "@/redux/slices/productSlice"
 import { Button } from "@/components/ui/button"
+import useProductState from "@/hooks/ProductState"
 
 const Products = () => {
-  const { products, error, isLoading, totalPages } = useSelector(
-    (state: RootState) => state.productR
-  )
+  const { products, isLoading, error, totalPages, product } = useProductState()
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize, setPageSize] = useState(5)
+  const [pageSize] = useState(5)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState("name")
   const [isAscending, setIsAscending] = useState("true")

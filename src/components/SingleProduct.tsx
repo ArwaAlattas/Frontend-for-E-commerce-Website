@@ -1,4 +1,3 @@
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { Button } from "./ui/button"

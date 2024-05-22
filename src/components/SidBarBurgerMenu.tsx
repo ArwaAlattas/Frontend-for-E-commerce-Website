@@ -1,93 +1,106 @@
-import * as React from 'react';
-import { Dropdown } from '@mui/base/Dropdown';
-import { Menu, MenuListboxSlotProps } from '@mui/base/Menu';
-import { MenuButton as BaseMenuButton } from '@mui/base/MenuButton';
-import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
-import { styled } from '@mui/system';
-import { CssTransition } from '@mui/base/Transitions';
-import { PopupContext } from '@mui/base/Unstable_Popup';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/redux/store';
-import { logoutUser } from '@/redux/slices/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
-import { LogOutIcon } from 'lucide-react';
+import * as React from "react"
+import { Dropdown } from "@mui/base/Dropdown"
+import { Menu, MenuListboxSlotProps } from "@mui/base/Menu"
+import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton"
+import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem"
+import { styled } from "@mui/system"
+import { CssTransition } from "@mui/base/Transitions"
+import { PopupContext } from "@mui/base/Unstable_Popup"
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined"
+import { useDispatch } from "react-redux"
+import { AppDispatch } from "@/redux/store"
+import { logoutUser } from "@/redux/slices/userSlice"
+import { useNavigate } from "react-router-dom"
+import useUserState from "../hooks/UserState"
 
 export default function MenuTransitions() {
-    const navigate = useNavigate();
-    const {isLoggedIn} = useSelector((state: RootState) => state .userR)
-    const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
+  const { isLoggedIn, userData } = useUserState()
+  const dispatch: AppDispatch = useDispatch()
   const handleLogout = () => {
-  dispatch(logoutUser())
-  navigate("/")
+    dispatch(logoutUser())
+    navigate("/")
   }
   const createHandleMenuClick = (menuItem: string) => {
     return () => {
-      console.log(`Clicked on ${menuItem}`);
-    };
-  };
-//   {isLoggedIn &&
-//     <>
-//      <Link className='nav__link' to="/">Products</Link> 
-//   <Link className='nav__link' to="/dashboard">Dashboard</Link>
-//   <Link className='nav__link ' to="/register"><ShoppingCartOutlinedIcon/></Link> 
-//      <Link className='nav__link ' to="/" onClick={handleLogout}><LogoutIcon/></Link> 
-//      < MenuTransitions/>
-//     </>}
-//     {!isLoggedIn && <>
-//     <Link  to="/">Products</Link> 
-//   <Link className='nav__link' to="/dashboard">Dashboard</Link>
-//   <Link className='nav__link ' to="/register"><ShoppingCartOutlinedIcon/></Link> 
-//   <Link className='nav__link ' to="/register"><AccountCircleOutlinedIcon/></Link> 
- 
-//  < MenuTransitions/>
-//     </>}
+      console.log(`Clicked on ${menuItem}`)
+    }
+  }
+  //   {isLoggedIn &&
+  //     <>
+  //      <Link className='nav__link' to="/">Products</Link>
+  //   <Link className='nav__link' to="/dashboard">Dashboard</Link>
+  //   <Link className='nav__link ' to="/register"><ShoppingCartOutlinedIcon/></Link>
+  //      <Link className='nav__link ' to="/" onClick={handleLogout}><LogoutIcon/></Link>
+  //      < MenuTransitions/>
+  //     </>}
+  //     {!isLoggedIn && <>
+  //     <Link  to="/">Products</Link>
+  //   <Link className='nav__link' to="/dashboard">Dashboard</Link>
+  //   <Link className='nav__link ' to="/register"><ShoppingCartOutlinedIcon/></Link>
+  //   <Link className='nav__link ' to="/register"><AccountCircleOutlinedIcon/></Link>
+
+  //  < MenuTransitions/>
+  //     </>}
   return (
     <Dropdown>
-      <MenuButton><AccountCircleOutlinedIcon/></MenuButton>
+      <MenuButton>
+        <AccountCircleOutlinedIcon sx={{ fontSize: 30, ":hover": { color: "#c6824c" } }} />
+      </MenuButton>
       <Menu slots={{ listbox: AnimatedListbox }}>
-      {isLoggedIn &&<>
-        <MenuItem onClick={()=>navigate("/")} >Home</MenuItem>
-        {/* <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem> */}
-        <MenuItem onClick={handleLogout}>Log out</MenuItem>
-      </>}
-      {!isLoggedIn && <>
-        <MenuItem onClick={()=>navigate("/")} >Home</MenuItem>
-        <MenuItem onClick={()=>navigate("/register")} >SignUp</MenuItem>
-        <MenuItem onClick={()=>navigate("/login")} >Login</MenuItem>
-      </>}
+        {isLoggedIn && (
+          <>
+            <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
+            <MenuItem
+              onClick={() =>
+                navigate(`/dashboard/${userData && userData.isAdmin ? "admin" : "user"}`)
+              }
+            >
+              {userData && userData.isAdmin ? "Admin" : "User"} Dashboard
+            </MenuItem>
+            {/* <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem> */}
+            <MenuItem onClick={handleLogout}>Log out</MenuItem>
+          </>
+        )}
+        {!isLoggedIn && (
+          <>
+            <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
+            <MenuItem onClick={() => navigate("/register")}>SignUp</MenuItem>
+            <MenuItem onClick={() => navigate("/login")}>Login</MenuItem>
+          </>
+        )}
       </Menu>
     </Dropdown>
-  );
+  )
 }
 
 const blue = {
-  50: '#F0F7FF',
-  100: '#C2E0FF',
-  200: '#99CCF3',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E6',
-  700: '#0059B3',
-  800: '#004C99',
-  900: '#003A75',
-};
+  50: "#F0F7FF",
+  100: "#C2E0FF",
+  200: "#99CCF3",
+  300: "#66B2FF",
+  400: "#3399FF",
+  500: "#007FFF",
+  600: "#0072E6",
+  700: "#0059B3",
+  800: "#004C99",
+  900: "#003A75"
+}
 
 const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
-};
+  50: "#F3F6F9",
+  100: "#E5EAF2",
+  200: "#DAE2ED",
+  300: "#C7D0DD",
+  400: "#B0B8C4",
+  500: "#9DA8B7",
+  600: "#6B7A90",
+  700: "#434D5B",
+  800: "#303740",
+  900: "#1C2025"
+}
 
-const Listbox = styled('ul')(
+const Listbox = styled("ul")(
   ({ theme }) => `
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 0.875rem;
@@ -98,10 +111,10 @@ const Listbox = styled('ul')(
   border-radius: 12px;
   overflow: auto;
   outline: 0px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  box-shadow: 0px 4px 30px ${theme.palette.mode === 'dark' ? grey[900] : grey[200]};
+  background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
+  border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+  color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+  box-shadow: 0px 4px 30px ${theme.palette.mode === "dark" ? grey[900] : grey[200]};
   z-index: 1;
 
   .closed & {
@@ -123,23 +136,23 @@ const Listbox = styled('ul')(
   .placement-bottom & {
     transform-origin: top;
   }
-  `,
-);
+  `
+)
 
 const AnimatedListbox = React.forwardRef(function AnimatedListbox(
   props: MenuListboxSlotProps,
-  ref: React.ForwardedRef<HTMLUListElement>,
+  ref: React.ForwardedRef<HTMLUListElement>
 ) {
-  const { ownerState, ...other } = props;
-  const popupContext = React.useContext(PopupContext);
+  const { ownerState, ...other } = props
+  const popupContext = React.useContext(PopupContext)
 
   if (popupContext == null) {
     throw new Error(
-      'The `AnimatedListbox` component cannot be rendered outside a `Popup` component',
-    );
+      "The `AnimatedListbox` component cannot be rendered outside a `Popup` component"
+    )
   }
 
-  const verticalPlacement = popupContext.placement.split('-')[0];
+  const verticalPlacement = popupContext.placement.split("-")[0]
 
   return (
     <CssTransition
@@ -149,8 +162,8 @@ const AnimatedListbox = React.forwardRef(function AnimatedListbox(
     >
       <Listbox {...other} ref={ref} />
     </CssTransition>
-  );
-});
+  )
+})
 
 const MenuItem = styled(BaseMenuItem)(
   ({ theme }) => `
@@ -166,21 +179,21 @@ const MenuItem = styled(BaseMenuItem)(
   }
 
   &.${menuItemClasses.focusVisible} {
-    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    outline: 3px solid ${theme.palette.mode === "dark" ? blue[600] : blue[200]};
+    background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
   }
 
   &.${menuItemClasses.disabled} {
-    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
+    color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
   }
 
   &:hover:not(.${menuItemClasses.disabled}) {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[50]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+    background-color: ${theme.palette.mode === "dark" ? blue[900] : blue[50]};
+    color: ${theme.palette.mode === "dark" ? blue[100] : blue[900]};
   }
-  `,
-);
+  `
+)
 
 const MenuButton = styled(BaseMenuButton)(
   ({ theme }) => `
@@ -193,23 +206,23 @@ const MenuButton = styled(BaseMenuButton)(
   color: white;
   transition: all 150ms ease;
   cursor: pointer;
-//   background: ${theme.palette.mode === 'dark' ? grey[900] : 'red'};
-//   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
+//   background: ${theme.palette.mode === "dark" ? grey[900] : "red"};
+//   border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+  color: ${theme.palette.mode === "dark" ? grey[200] : grey[900]};
 //   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 
   &:hover {
-    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
+    background: ${theme.palette.mode === "dark" ? grey[800] : grey[50]};
+    border-color: ${theme.palette.mode === "dark" ? grey[600] : grey[300]};
   }
 
   &:active {
-    background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
+    background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 4px ${theme.palette.mode === 'dark' ? blue[300] : blue[200]};
+    box-shadow: 0 0 0 4px ${theme.palette.mode === "dark" ? blue[300] : blue[200]};
     outline: none;
   }
-  `,
-);
+  `
+)

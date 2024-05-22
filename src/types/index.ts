@@ -10,34 +10,35 @@ export type Product = {
   category?: Category
   createdAt: string
 }
-export type ProductState = { 
-  products: Product[] 
-  totalPages : number
-  product:Product | null
+export type ProductState = {
+  products: Product[]
+  totalPages: number
+  product: Product | null
   error: null | string
   isLoading: boolean
 }
 export type Category = {
   categoryID: string
-  name:string
-  description:string
-  createdAt:string
-  products:Product[]
+  name: string
+  description: string
+  createdAt: string
+  products: Product[]
 }
 export type User = {
+  userID:string
   username: string
   imgUrl?: string
   email: string
   firstName: string
   lastName: string
   phoneNumber: string
-  address:string
-  isAdmin?:string
-  isBanned?:string
-  birthDate?:string
+  address: string
+  isAdmin?: string
+  isBanned?: string
+  birthDate?: string
   createdAt?: string
 }
-export type UserState = { 
+export type UserState = {
   error: null | string
   isLoading: boolean
   userData: null | User
@@ -48,6 +49,30 @@ export type UserState = {
 export type LoginFormData = {
   email: string
   password: string
+}
+
+export type LoginData = {
+  isLoggedIn: boolean
+  userData: User | null
+  token: string
+}
+export type RegisterFormData = {
+  userID:string
+  username: string
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  imgUrl: FileList
+  phoneNumber: string
+  address: string
+}
+export type UpdateProfileFormData = {
+  username: string
+  firstName: string
+  lastName: string
+  phoneNumber: string
+  address: string
 }
 // export type Cart = {
 //   cartID: string

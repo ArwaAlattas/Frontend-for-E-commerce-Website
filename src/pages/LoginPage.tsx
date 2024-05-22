@@ -47,9 +47,6 @@ export default function Login() {
       const response = await dispatch(loginUser(data))
       console.log("Response from Register:" + response)
     const isAdmin = response.payload.data.loggedInUser.isAdmin;
-    
-
-    console.log(isAdmin)
       toastSuccess(response.payload.message)
       navigate(isAdmin? "/dashboard/admin":"/dashboard/user")
     } catch (error: any) {

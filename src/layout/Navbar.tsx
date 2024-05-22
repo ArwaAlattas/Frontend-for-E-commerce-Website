@@ -4,7 +4,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch, useSelector } from 'react-redux';
 
-import "../App.css"
+import "../styles/App.css"
 import { AppDispatch, RootState } from '@/redux/store';
 import { logoutUser } from '@/redux/slices/userSlice';
 import MenuTransitions from '@/components/SidBarBurgerMenu';
@@ -21,8 +21,8 @@ dispatch(logoutUser())
    <div className='header'>
    <div> <img className='img__logo'alt='logo' src='src/images/h-logo.png'/> </div>
     <nav className='nav-bar'> 
-    <Link className='nav__link ' to="/cart"><ShoppingCartOutlinedIcon/></Link> 
-   < MenuTransitions/>
+    <Link className='nav__link ' to="/cart"><ShoppingCartOutlinedIcon  sx={{ fontSize: 30 }} /></Link> 
+   < MenuTransitions />
    </nav>
    </div>
   )

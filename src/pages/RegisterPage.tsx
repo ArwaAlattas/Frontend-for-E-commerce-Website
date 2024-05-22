@@ -14,23 +14,15 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
 
-import "./register.css"
+import "../styles/register.css"
 import { AppDispatch } from "@/redux/store"
 import { registerUser } from "@/redux/slices/userSlice"
 import { toastError, toastSuccess } from "@/utils/toast"
 import { uploadImageToCloudinary } from "@/utils/cloudinary"
 import PageTitle from "@/components/PageTitle"
+import { RegisterFormData } from "@/types"
 
-type FormData = {
-  username: string
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-  imgUrl: FileList
-  phoneNumber: string
-  address: string
-}
+
 
 const theme = createTheme({
   palette: {
@@ -51,11 +43,11 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormData>()
+  } = useForm<RegisterFormData>()
 
   const dispatch: AppDispatch = useDispatch()
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     try {
       let imageUrl = " "
       if (data.imgUrl && data.imgUrl.length > 0) {
