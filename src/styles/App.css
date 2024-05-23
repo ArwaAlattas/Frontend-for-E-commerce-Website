@@ -65,13 +65,14 @@ main {
 }
 .main-container {
   flex: 4;
-  min-height: 75vh;
+ height: 75vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: start;
   justify-items: start;
   align-items: center;
+  overflow: scroll;
 }
 .logo {
   height: 6em;

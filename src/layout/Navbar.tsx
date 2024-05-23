@@ -10,7 +10,7 @@ import { logoutUser } from '@/redux/slices/userSlice';
 import MenuTransitions from '@/components/SidBarBurgerMenu';
 
 
-const NavBar = () => {
+const NavBar:React.FC  = () => {
   const {isLoggedIn} = useSelector((state: RootState) => state .userR)
   const dispatch: AppDispatch = useDispatch()
 const handleLogout = () => {
@@ -19,7 +19,7 @@ dispatch(logoutUser())
 
   return (
    <div className='header'>
-   <div> <img className='img__logo'alt='logo' src='src/images/h-logo.png'/> </div>
+   <div> <img className='img__logo'alt='logo' src='https://res.cloudinary.com/arwa-cloud/image/upload/v1716439647/e-commerce/xnssbamjbhhp2gmsuagc.png'/> </div>
     <nav className='nav-bar'> 
     <Link className='nav__link ' to="/cart"><ShoppingCartOutlinedIcon  sx={{ fontSize: 30 }} /></Link> 
    < MenuTransitions />

@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 
 import NavBar from "../layout/Navbar"
 import Products from "@/pages/ProductsPage"
@@ -15,7 +15,7 @@ import Register from "@/pages/RegisterPage"
 import Login from "@/pages/LoginPage"
 import UserDashboard from "@/pages/UserDashboardPage"
 import AdminDashboard from "@/pages/AdminDashboardPage"
-import CartPage from "@/components/CartPage"
+import CartPage from "@/pages/CartPage"
 import UserProfile from "@/components/UserProfile"
 import UserOrders from "@/components/UserOrders"
 import AdminCategories from "@/components/AdminCategories"
@@ -26,11 +26,19 @@ import ProtectedRoute from "./ProtectedRoute"
 import AdminRoute from "./AdminRoute"
 
 const Index = () => {
+
   return (
     <BrowserRouter>
-      <NavBar />
-      <main>
         <Routes>
+          <Route  element={
+            <>
+              <NavBar />
+              <main>
+              <Outlet />
+              </main>
+              <Footer/>
+            </>
+          }>
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="user" element={<UserDashboard />} />
             <Route path="user/profile" element={<UserProfile />} />
@@ -55,11 +63,12 @@ const Index = () => {
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
+          </Route>
           <Route path="*" element={<Error />} />
         </Routes>
-      </main>
-      <Footer />
+      
+     
+      
     </BrowserRouter>
   )
 }

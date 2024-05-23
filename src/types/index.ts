@@ -24,6 +24,14 @@ export type Category = {
   createdAt: string
   products: Product[]
 }
+export type CategoryState = {
+  categories: Category[],
+  totalPages: number,
+  category: Category | null,
+  error: null | string,
+  isLoading: boolean
+}
+
 export type User = {
   userID:string
   username: string
@@ -74,6 +82,15 @@ export type UpdateProfileFormData = {
   phoneNumber: string
   address: string
 }
+export type UpdateCategoryFormData = {
+  name:string
+  description:string
+  }
+  
+  export type CreateCategoryFormData = {
+    name:string
+    description:string  
+  }
 // export type Cart = {
 //   cartID: string
 // }

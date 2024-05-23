@@ -19,7 +19,7 @@ function Footer() {
         <Link to="/about">About Us</Link>
       </div>
    
-        <img className="img__logo" alt="logo"  src="src/images/logo.png" />
+        <img className="img__logo" alt="logo"  src="https://res.cloudinary.com/arwa-cloud/image/upload/v1716439530/e-commerce/ncosfpmtr6xposgyhaot.png" />
       
       <div className="footer__right">
         <h2> CONTACT US </h2>
