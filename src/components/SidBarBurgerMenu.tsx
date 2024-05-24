@@ -56,7 +56,7 @@ export default function MenuTransitions() {
                 navigate(`/dashboard/${userData && userData.isAdmin ? "admin" : "user"}`)
               }
             >
-              {userData && userData.isAdmin ? "Admin" : "User"} Dashboard
+              My Dashboard
             </MenuItem>
             {/* <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem> */}
             <MenuItem onClick={handleLogout}>Log out</MenuItem>

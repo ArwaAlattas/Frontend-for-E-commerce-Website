@@ -1,40 +1,28 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { useForm } from "react-hook-form"
-import AddIcon from "@mui/icons-material/Add"
 import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 
 import "../styles/products.css"
 import PageTitle from "@/components/PageTitle"
 import { AppDispatch } from "@/redux/store"
-import { Button } from "@/components/ui/button"
 import Adminsidebar from "./AdminSideBar"
-import useCategoryState from "@/hooks/CategoryState"
-import { fetchCategories } from "@/redux/slices/categorySlice"
-import SingleCategory from "./SingleCategory"
-import { CreateCategoryFormData } from "@/types"
-import CreateCategoryDialog from "./CreatCategoryDialog"
+import useUserState from "@/hooks/UserState"
+import { fetchUsers } from "@/redux/slices/userSlice"
+import SingleUser from "./SingleUser"
 
-const AdminCategories = () => {
-  const { categories, isLoading, error, totalPages, category } = useCategoryState()
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<CreateCategoryFormData>()
-
+const AdminUserManagement = () => {
+  const { users, isLoading, error, totalPages,userData } = useUserState()
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
   const [isAscending, setIsAscending] = useState("true")
-  const [isFormOpen, setisFormOpen] = useState(false)
+
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchCategories({ pageNumber, pageSize, keyword, sortBy, isAscending }))
+      await dispatch(fetchUsers({ pageNumber, pageSize, keyword, sortBy, isAscending }))
     }
     fetchData()
   }, [pageNumber, keyword, sortBy, isAscending])
@@ -67,7 +55,7 @@ const AdminCategories = () => {
     <div className="flex-space-around">
       <Adminsidebar />
       <div className="main-container">
-        <h1 className="text-2xl uppercase mb-1">Admin Categories</h1>
+        <h1 className="text-2xl uppercase mb-1">Users</h1>
         <PageTitle title="Categories" />
 
         {isLoading && <p>Loading ... </p>}
@@ -102,34 +90,30 @@ const AdminCategories = () => {
               <option value="DateASC">Old to New</option>
             </optgroup>
           </select>
-            <Button
-             className="h-8"
-              onClick={() => {
-                setisFormOpen(!isFormOpen)
-              }}
-            >
-              <AddIcon />
-            </Button>
           </div>
         </div>
-        {isFormOpen && <CreateCategoryDialog />}
+       
 
         <hr className="line" />
         <TableContainer component={Paper} >
-          <Table sx={{ mainWidth: 650,borderRadius:10 }} aria-label="simple table">
+          <Table  sx={{ mainWidth: 650 }} aria-label="simple table">
             <TableHead sx={{ bgcolor: '#EFEBE7' ,fontSize: 34, fontWeight: 'medium' }} >
               <TableRow>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} >Name</TableCell>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}>Description</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} >Username</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}>Email</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}>phoneNumber</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}>Address</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}>Is Admin</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}>Is Banned</TableCell>
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
-            {categories &&
-              categories.length > 0 &&
-              categories?.map((category) => (
-                <SingleCategory
-                  key={category.categoryID}
-                  category={category}
+            {users &&
+              users.length > 0 &&
+              users?.map((user) => (
+                <SingleUser
+                  key={user.userID}
+                   user={user}
                   totalPage={totalPages}
                 />
               ))}
@@ -159,4 +143,6 @@ const AdminCategories = () => {
   )
 }
 
-export default AdminCategories
+export default AdminUserManagement
+
+

@@ -2,21 +2,55 @@ import api from "@/api"
 import { LoginFormData, UpdateProfileFormData, User, UserState } from "@/types"
 import { getLocalStorage, getToken, setLocalStorage } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import clsx from "clsx"
 
 const data = getLocalStorage("loginData", { userData: null, token: null, isLoggedIn: false })
 
 const initialState: UserState = {
+  users:[],
   error: null,
   isLoading: false,
   userData: data.userData,
+  totalPages: 1,
   token: data.token,
   isLoggedIn: data.isLoggedIn
 }
+
+export const fetchUsers = createAsyncThunk(
+  "users/fetchUsers",
+  async ({
+    pageNumber,
+    pageSize,
+    keyword,
+    sortBy,
+    isAscending
+  }: {
+    pageNumber: number
+    pageSize: number
+    keyword: string
+    sortBy:string
+    isAscending:string
+  }) => {
+      const response = keyword.length > 0? await api.get(`/users?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}&sortBy=${sortBy}&isAscending=${isAscending}`,{
+        headers:{
+          Authorization: `Bearer ${getToken()}`
+        }
+      }):
+      await api.get(`/users?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&isAscending=${isAscending}`,{
+        headers:{
+          Authorization: `Bearer ${getToken()}`
+        }
+      })
+      console.log(response.data)
+      return response.data
+  }
+)
 
 export const registerUser = createAsyncThunk("users/registerUser", async (newUser: User) => {
   const response = await api.post(`/signup`, newUser)
   return response.data
 })
+
 export const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ userId, updateUser }: { userId: string; updateUser: UpdateProfileFormData }) => {
@@ -30,8 +64,20 @@ export const updateUser = createAsyncThunk(
   }
 )
 
+export const banUnbanUser = createAsyncThunk(
+  "users/banUnbanUser",
+  async (userId: string) => {
+    const response = await api.put(`/users/banUnban/${userId}`,{}, {
+      headers:{
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return response.data //http://localhost:5343/api/users/7d5be7c7-f840-426c-b51f-c85e641bbbb3
+  }
+)
+
 export const loginUser = createAsyncThunk("users/loginUser", async (userData: LoginFormData) => {
-  const response = await api.post(`/login`, userData)
+  const response = await api.post(`/login`, userData )
 
   return response.data
 })
@@ -62,6 +108,19 @@ const userSlice = createSlice({
         userData: state.userData,
         isLoggedIn: state.isLoggedIn
       })
+    })
+    builder.addCase(banUnbanUser.fulfilled, (state, action) => {
+      const foundUser = state.users.find((user) => user.userID === action.payload.data.userID)
+      if(foundUser){
+        foundUser.isBanned = action.payload.data.isBanned
+        state.isLoading = false
+      }
+      
+     })
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.users = action.payload.data.items
+      state.totalPages = action.payload.data.totalPages
+      state.isLoading = false
     })
 
     builder.addCase(updateUser.fulfilled, (state, action) => {

@@ -1,10 +1,9 @@
 import React from "react"
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
 
 import NavBar from "../layout/Navbar"
 import Products from "@/pages/ProductsPage"
 import Error from "@/pages/ErrorPage"
-import Dashboard from "@/pages/UserDashboardPage"
 import Footer from "@/layout/Footer"
 import ProductDetails from "@/pages/ProductDetailsPage"
 import "../styles/App.css"
@@ -20,10 +19,10 @@ import UserProfile from "@/components/UserProfile"
 import UserOrders from "@/components/UserOrders"
 import AdminCategories from "@/components/AdminCategories"
 import AdminProducts from "@/components/AdminProducts"
-import AdminUsers from "@/components/AdminUsers"
 import AdminOrders from "@/components/AdminOrders"
 import ProtectedRoute from "./ProtectedRoute"
 import AdminRoute from "./AdminRoute"
+import AdminUserManagement from "@/components/AdminUserManagement"
 
 const Index = () => {
 
@@ -49,7 +48,7 @@ const Index = () => {
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/categories" element={<AdminCategories />} />
             <Route path="admin/products" element={<AdminProducts />} />
-            <Route path="admin/users" element={<AdminUsers />} />
+            <Route path="admin/users" element={<AdminUserManagement />} />
             <Route path="admin/orders" element={<AdminOrders />} />
           </Route>
 

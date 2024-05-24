@@ -41,12 +41,14 @@ export type User = {
   lastName: string
   phoneNumber: string
   address: string
-  isAdmin?: string
-  isBanned?: string
+  isAdmin?: boolean
+  isBanned?:boolean
   birthDate?: string
   createdAt?: string
 }
 export type UserState = {
+  users:User[],
+  totalPages: number,
   error: null | string
   isLoading: boolean
   userData: null | User
