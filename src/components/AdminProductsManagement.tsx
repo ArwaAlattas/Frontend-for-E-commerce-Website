@@ -4,25 +4,25 @@ import { useForm } from "react-hook-form"
 import AddIcon from "@mui/icons-material/Add"
 import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 
-import "../styles/products.css"
 import PageTitle from "@/components/PageTitle"
 import { AppDispatch } from "@/redux/store"
 import { Button } from "@/components/ui/button"
 import Adminsidebar from "./AdminSideBar"
-import useCategoryState from "@/hooks/CategoryState"
-import { fetchCategories } from "@/redux/slices/categorySlice"
-import SingleCategory from "./SingleCategory"
-import { CreateCategoryFormData } from "@/types"
-import CreateCategoryDialog from "./CreatCategoryDialog"
+import { CreateProductFormData } from "@/types"
+import useProductState from "@/hooks/ProductState"
+import SingleAdminProduct from "./SingleAdminProduct"
+import { fetchProducts } from "@/redux/slices/productSlice"
+import CreateProductDialog from "./CreatProductDialog"
 
-const AdminCategories = () => {
-  const { categories, isLoading, error, totalPages, category } = useCategoryState()
+const AdminProductsManagement = () => {
+  const { products, isLoading, error, totalPages, product } = useProductState()
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
-  } = useForm<CreateCategoryFormData>()
+  } = useForm<CreateProductFormData>()
 
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
@@ -30,11 +30,11 @@ const AdminCategories = () => {
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
   const [isAscending, setIsAscending] = useState("true")
-  const [isFormOpen, setisFormOpen] = useState(false)
+  const [isFormOpen, setIsFormOpen] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchCategories({ pageNumber, pageSize, keyword, sortBy, isAscending }))
+      await dispatch(fetchProducts({ pageNumber, pageSize, keyword, sortBy, isAscending }))
     }
     fetchData()
   }, [pageNumber, keyword, sortBy, isAscending])
@@ -68,7 +68,7 @@ const AdminCategories = () => {
     <div className="flex-space-around">
       <Adminsidebar />
       <div className="main-container">
-        <h1 className="text-2xl uppercase mb-1">Admin Categories</h1>
+        <h1 className="text-2xl uppercase ">Products</h1>
         <PageTitle title="Categories" />
 
         {isLoading && <p>Loading ... </p>}
@@ -106,33 +106,37 @@ const AdminCategories = () => {
             <Button
               className="h-8"
               onClick={() => {
-                setisFormOpen(!isFormOpen)
+                setIsFormOpen(!isFormOpen)
               }}
             >
               <AddIcon />
             </Button>
           </div>
         </div>
-        {isFormOpen && <CreateCategoryDialog />}
+        {isFormOpen && <CreateProductDialog />}
 
         <hr className="line" />
         <TableContainer component={Paper}>
           <Table sx={{ mainWidth: 650, borderRadius: 10 }} aria-label="simple table">
             <TableHead sx={{ bgcolor: "#EFEBE7", fontSize: 34, fontWeight: "medium" }}>
               <TableRow>
+                <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>Image</TableCell>
                 <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>Name</TableCell>
+                <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>Categories</TableCell>
                 <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>Description</TableCell>
+                <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>price</TableCell>
+                <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>Quantity</TableCell>
                 <TableCell sx={{ fontSize: 18, fontWeight: "medium" }} align="center">
                   Actions
                 </TableCell>
               </TableRow>
             </TableHead>
-            {categories &&
-              categories.length > 0 &&
-              categories.map((category) => (
-                <SingleCategory
-                  key={category.categoryID}
-                  category={category}
+            {products &&
+              products.length > 0 &&
+              products.map((product) => (
+                <SingleAdminProduct
+                  key={product.productID}
+                  product={product}
                   totalPage={totalPages}
                 />
               ))}
@@ -162,4 +166,4 @@ const AdminCategories = () => {
   )
 }
 
-export default AdminCategories
+export default AdminProductsManagement

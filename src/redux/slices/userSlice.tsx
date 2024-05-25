@@ -1,5 +1,5 @@
 import api from "@/api"
-import { LoginFormData, UpdateProfileFormData, User, UserState } from "@/types"
+import { CreateProductFormData, LoginFormData, UpdateProfileFormData, User, UserState } from "@/types"
 import { getLocalStorage, getToken, setLocalStorage } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import clsx from "clsx"
@@ -50,6 +50,8 @@ export const registerUser = createAsyncThunk("users/registerUser", async (newUse
   const response = await api.post(`/signup`, newUser)
   return response.data
 })
+
+
 
 export const updateUser = createAsyncThunk(
   "users/updateUser",

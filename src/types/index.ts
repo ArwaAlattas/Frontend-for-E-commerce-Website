@@ -1,6 +1,6 @@
 export type Product = {
   productID: string
-  imgUrl: string
+  imgUrl?: string 
   productName: string
   slug: string
   description: string
@@ -76,6 +76,24 @@ export type RegisterFormData = {
   imgUrl: FileList
   phoneNumber: string
   address: string
+}
+export type CreateProductFormData = {
+  imgUrl?:FileList
+  productName: string
+  description: string
+  quantity: number
+  price: number
+  categoryId: string
+  category: Category
+}
+export type CreateProductForBackend = {
+  imgUrl?:string
+  productName: string
+  description: string
+  quantity: number
+  price: number
+  categoryId: string
+  category: Category
 }
 export type UpdateProfileFormData = {
   username: string

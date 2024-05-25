@@ -1,34 +1,34 @@
-import { useDispatch } from 'react-redux'
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from "react-redux"
+import { Fragment, useRef, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { SubmitHandler, useForm } from "react-hook-form"
 
-import { Button } from './ui/button'
-import { CreateCategoryFormData } from '@/types'
-import { createCategory } from '@/redux/slices/categorySlice'
-import { AppDispatch } from '@/redux/store'
-import { toastSuccess } from '@/utils/toast'
-
+import { Button } from "./ui/button"
+import { CreateCategoryFormData } from "@/types"
+import { createCategory } from "@/redux/slices/categorySlice"
+import { AppDispatch } from "@/redux/store"
+import { toastSuccess } from "@/utils/toast"
 
 export default function CreateCategoryDialog() {
   const [open, setOpen] = useState(true)
   const dispatch: AppDispatch = useDispatch()
   const cancelButtonRef = useRef(null)
-  const { register,
+  const {
+    register,
     handleSubmit,
-    formState: { errors
-     }} = useForm<CreateCategoryFormData>()
+    formState: { errors }
+  } = useForm<CreateCategoryFormData>()
 
-     const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data) => {
-        try {
-            const response = await dispatch(createCategory(data))
-             toastSuccess("Category Created successfully")
-            console.log(data)
-          } catch (error: any) {
-            console.log(error)
-          }
-      setOpen(false)
-      }
+  const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data) => {
+    try {
+      const response = await dispatch(createCategory(data))
+      toastSuccess("Category Created successfully")
+      console.log(data)
+    } catch (error: any) {
+      console.log(error)
+    }
+    setOpen(false)
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -59,33 +59,39 @@ export default function CreateCategoryDialog() {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-[#efebe7] text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-[#efebe7]  px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                  <form className="update-form w-full h-full flex items-center" onSubmit={handleSubmit(onSubmit)} >
-                <div className="form-field flex items-center justify-center gap-2 ">
-                  <label htmlFor="name"> Name: </label>
-                  <input
-                    type="text"
-                    {...register("name", {
-                      required: "Name is required",
-                      minLength: { value: 2, message: "Name must be at least 2 characters" }
-                    })}
-                  />
-                </div>
-                {errors.name && <p>{errors.name.message}</p>}
-                <div className="form-field flex items-center justify-center gap-2 ">
-                  <label htmlFor="firstName">Description: </label>
-                  <input
-                    type="text"
-                    {...register("description", {
-                      required: "description is required",
-                      minLength: { value: 2, message: "description must be at least 2 characters" }
-                    })}
-                  />
-                </div>
-                {errors.description && <p>{errors.description.message}</p>}
-                  <Button className="btn"  type="submit">
-                    Create Category
-                  </Button>
-              </form>
+                    <form
+                      className="update-form w-full h-full flex items-center"
+                      onSubmit={handleSubmit(onSubmit)}
+                    >
+                      <div className="form-field flex items-center justify-center gap-2 ">
+                        <label htmlFor="name"> Name: </label>
+                        <input
+                          type="text"
+                          {...register("name", {
+                            required: "Name is required",
+                            minLength: { value: 2, message: "Name must be at least 2 characters" }
+                          })}
+                        />
+                      </div>
+                      {errors.name && <p>{errors.name.message}</p>}
+                      <div className="form-field flex items-center justify-center gap-2 ">
+                        <label htmlFor="firstName">Description: </label>
+                        <input
+                          type="text"
+                          {...register("description", {
+                            required: "description is required",
+                            minLength: {
+                              value: 2,
+                              message: "description must be at least 2 characters"
+                            }
+                          })}
+                        />
+                      </div>
+                      {errors.description && <p>{errors.description.message}</p>}
+                      <Button className="btn" type="submit">
+                        Create Category
+                      </Button>
+                    </form>
                   </div>
                 </div>
               </Dialog.Panel>

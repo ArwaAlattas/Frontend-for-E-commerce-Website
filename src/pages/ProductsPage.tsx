@@ -13,7 +13,7 @@ const Products = () => {
   const { products, isLoading, error, totalPages, product } = useProductState()
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize] = useState(5)
+  const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState("name")
   const [isAscending, setIsAscending] = useState("true")

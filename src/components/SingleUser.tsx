@@ -13,7 +13,7 @@ function SingleUser(props: { user: User; totalPage: number }) {
 
   const handleBanUnban = async (userId: string) => {
     try {
-     userId && await dispatch(banUnbanUser(userId))
+      userId && (await dispatch(banUnbanUser(userId)))
       toastSuccess("user updated")
     } catch (error: any) {
       toastError("an error occur ")

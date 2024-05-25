@@ -18,26 +18,28 @@ import CartPage from "@/pages/CartPage"
 import UserProfile from "@/components/UserProfile"
 import UserOrders from "@/components/UserOrders"
 import AdminCategories from "@/components/AdminCategories"
-import AdminProducts from "@/components/AdminProducts"
 import AdminOrders from "@/components/AdminOrders"
 import ProtectedRoute from "./ProtectedRoute"
 import AdminRoute from "./AdminRoute"
+
+import AdminProductsManagement from "@/components/AdminProductsManagement"
 import AdminUserManagement from "@/components/AdminUserManagement"
 
 const Index = () => {
-
   return (
     <BrowserRouter>
-        <Routes>
-          <Route  element={
+      <Routes>
+        <Route
+          element={
             <>
               <NavBar />
               <main>
-              <Outlet />
+                <Outlet />
               </main>
-              <Footer/>
+              <Footer />
             </>
-          }>
+          }
+        >
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="user" element={<UserDashboard />} />
             <Route path="user/profile" element={<UserProfile />} />
@@ -47,7 +49,7 @@ const Index = () => {
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/categories" element={<AdminCategories />} />
-            <Route path="admin/products" element={<AdminProducts />} />
+            <Route path="admin/products" element={<AdminProductsManagement />} />
             <Route path="admin/users" element={<AdminUserManagement />} />
             <Route path="admin/orders" element={<AdminOrders />} />
           </Route>
@@ -62,12 +64,9 @@ const Index = () => {
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          </Route>
-          <Route path="*" element={<Error />} />
-        </Routes>
-      
-     
-      
+        </Route>
+        <Route path="*" element={<Error />} />
+      </Routes>
     </BrowserRouter>
   )
 }

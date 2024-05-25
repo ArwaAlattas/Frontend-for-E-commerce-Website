@@ -25,11 +25,8 @@ export const fetchCategories = createAsyncThunk(
     sortBy:string
     isAscending:string
   }) => {
-    // const response = await api.get(`/categories`)
-    //   return response.data //http://localhost:5343/api/categories
     const response = keyword.length > 0? await api.get(`/categories?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}&sortBy=${sortBy}&isAscending=${isAscending}`):
     await api.get(`/categories?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&isAscending=${isAscending}`)
-    // res.data.data.items.$values   ?pageNumber=1&pageSize=2     sortBy=name&isAscending=true
     return response.data
   }
 )
@@ -81,7 +78,7 @@ const categorySlice = createSlice({
       state.categories.push(action.payload)
        state.isLoading = false
      })
-     
+
      builder.addCase(updateCategory.fulfilled, (state, action) => {
       const foundCategory = state.categories.find((category) => category.categoryID === action.payload.data.categoryID)
       if(foundCategory){

@@ -46,13 +46,11 @@ function UserProfile() {
             <p>Email: {userData.email}</p>
             <p>Address: {userData.address}</p>
             <div className="flex-row-center">
-            <Button onClick={() => setIsFormOpen(!isFormOpen)}>
-              {isFormOpen ? "Close Edit Profile " : "EditUser Profile "}
-            </Button>
+              <Button onClick={() => setIsFormOpen(!isFormOpen)}>
+                {isFormOpen ? "Close Edit Profile " : "EditUser Profile "}
+              </Button>
 
-            <Button variant="delete">
-            Delete My acount
-            </Button>
+              <Button variant="delete">Delete My acount</Button>
             </div>
             {isFormOpen && (
               <form onSubmit={handleSubmit(onSubmit)} className="update-form">
@@ -104,12 +102,12 @@ function UserProfile() {
                 </div>
 
                 <div className="form-field">
-                    <label htmlFor="address"> Address: </label>
-                    <input id="" {...register("address")}></input>
-                  </div>
-                  <Button className="btn" type="submit">
-                    Update Profile
-                  </Button>
+                  <label htmlFor="address"> Address: </label>
+                  <input id="" {...register("address")}></input>
+                </div>
+                <Button className="btn" type="submit">
+                  Update Profile
+                </Button>
               </form>
             )}
           </>
