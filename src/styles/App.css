@@ -55,7 +55,7 @@ main {
   border-radius: 50%;
 }
 .menu {
-  min-height: 75vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -65,7 +65,7 @@ main {
 }
 .main-container {
   flex: 4;
- height: 75vh;
+ height: 100vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;

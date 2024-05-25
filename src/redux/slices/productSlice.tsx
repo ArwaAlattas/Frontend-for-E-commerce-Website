@@ -1,6 +1,6 @@
 import api from "@/api"
 import useCategoryState from "@/hooks/CategoryState"
-import { CreateProductForBackend,ProductState } from "@/types"
+import { CreateProductForBackend, ProductState } from "@/types"
 import { getToken } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
@@ -11,7 +11,7 @@ const initialState: ProductState = {
   error: null,
   isLoading: false
 }
- 
+
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async ({
@@ -19,54 +19,94 @@ export const fetchProducts = createAsyncThunk(
     pageSize,
     keyword,
     sortBy,
-    isAscending
+    isAscending,
+    selectedCategories,
+    minPrice,
+    maxPrice
   }: {
     pageNumber: number
     pageSize: number
     keyword: string
-    sortBy:string
-    isAscending:string
+    sortBy: string
+    isAscending: string
+    selectedCategories:string[]
+    minPrice?:number
+    maxPrice?:number
   }) => {
-      const response = keyword.length > 0? await api.get(`/products?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}&sortBy=${sortBy}&isAscending=${isAscending}`):
-      await api.get(`/products?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&isAscending=${isAscending}`)
-      // res.data.data.items.$values   ?pageNumber=1&pageSize=2     sortBy=name&isAscending=true
-      return response.data
+    const params =  new URLSearchParams ({
+       pageNumber: pageNumber.toString(), 
+       pageSize:pageSize.toString(),
+       isAscending,
+       keyword,
+       sortBy
+  })
+  selectedCategories.forEach((categoryId)=>{
+    params.append( "SelectedCategories", categoryId)
+    })
+    if(minPrice !== undefined){
+      params.append( "minPrice", minPrice.toString())
+    }
+    if(maxPrice !== undefined){
+      params.append( "maxPrice", maxPrice.toString())
+    }
+    //maxPrice
+    const response = await api.get ("/products" , { params })
+    // const response =
+    //   keyword.length > 0
+    //     ? await api.get(
+    //         `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}&sortBy=${sortBy}&isAscending=${isAscending}`
+    //       )
+    //     : await api.get(
+    //         `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&isAscending=${isAscending}`
+    //       )
+    //http://localhost:5343/api/products?SelectedCategories=842d7a97-b1ef-446e-a847-35580c74c128&SelectedCategories=7f1a3881-78be-4247-a018-856433accdfb&minPrice=20
+    return response.data
   }
 )
 export const createProduct = createAsyncThunk(
   "products/createProduct ",
   async (newProduct: CreateProductForBackend) => {
-    const token = getToken();
-    const response = await api.post(`/products`, newProduct ,{
-      headers:{
+    const token = getToken()
+    const response = await api.post(`/products`, newProduct, {
+      headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    return response.data 
+    return response.data
   }
 )
 
 export const fetchProductById = createAsyncThunk(
   "products/fetchProductById",
   async (id: string | undefined) => {
-    const response = await api.get(`/products/post/${id}`)
+    const response = await api.get(`/products/${id}`)
     return response.data
-  })
+  }
+)
 
-export const updateProducts  = createAsyncThunk("products/updateProducts ", async ({productId,updateProduct}:{productId:string,updateProduct: CreateProductForBackend}) => {
-  const response = await api.put(`/products/${productId}`, updateProduct, {
-    headers:{
-      Authorization: `Bearer ${getToken()}`
-    }
-  })
- return response.data
-})
+export const updateProducts = createAsyncThunk(
+  "products/updateProducts ",
+  async ({
+    productId,
+    updateProduct
+  }: {
+    productId: string
+    updateProduct: CreateProductForBackend
+  }) => {
+    const response = await api.put(`/products/${productId}`, updateProduct, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return response.data
+  }
+)
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async (productId:string) => {
-    await api.delete(`/products/${productId}`,  {
-      headers:{
+  async (productId: string) => {
+    await api.delete(`/products/${productId}`, {
+      headers: {
         Authorization: `Bearer ${getToken()}`
       }
     })
@@ -86,37 +126,35 @@ const productSlice = createSlice({
     })
 
     builder.addCase(fetchProductById.fulfilled, (state, action) => {
-      state.product =  action.payload.data
+      state.product = action.payload.data
       state.isLoading = false
     })
     builder.addCase(createProduct.fulfilled, (state, action) => {
-      // const foundCategory = categories.find((category) => category.categoryID === action.payload.data.categoryID)
-      // action.payload.data.category = foundCategory
       console.log(action.payload)
-      state.products =  [...state.products, action.payload.data]
-       state.isLoading = false
-     })
+      state.products.push(action.payload.data)
+      state.isLoading = false
+    })
 
-     builder.addCase(updateProducts.fulfilled, (state, action) => {
-      const foundProduct = state.products.find((product) => product.productID === action.payload.data.productID)
-      if(foundProduct){
+    builder.addCase(updateProducts.fulfilled, (state, action) => {
+      const foundProduct = state.products.find(
+        (product) => product.productID === action.payload.data.productID
+      )
+      if (foundProduct) {
         foundProduct.productName = action.payload.data.productName
-        if(action.payload.data.imgUrl.length > 0){
-          foundProduct.imgUrl = action.payload.data.imgUrl
-        }
-        foundProduct.price = action.payload.data.price 
-        foundProduct.description = action.payload.data.description 
+        foundProduct.imgUrl = action.payload.data.imgUrl
+        foundProduct.price = action.payload.data.price
+        foundProduct.description = action.payload.data.description
         foundProduct.categoryId = action.payload.data.categoryId
-       foundProduct.quantity = action.payload.data.quantity
-       foundProduct.category = action.payload.data.category
+        foundProduct.quantity = action.payload.data.quantity
+        foundProduct.category = action.payload.data.category
         state.isLoading = false
-      } 
-     })
+      }
+    })
 
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
-      state.products = state.products.filter(product => product.productID !== action.payload)
+      state.products = state.products.filter((product) => product.productID !== action.payload)
       state.isLoading = false
-     })
+    })
     builder.addMatcher(
       (action) => action.type.endsWith("/pending"),
       (state) => {
