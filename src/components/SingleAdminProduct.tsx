@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "../styles/App.css"
 import { Product } from "@/types"
 import { Button } from "./ui/button"
@@ -8,11 +8,19 @@ import { toastError, toastSuccess } from "@/utils/toast"
 import { TableBody, TableCell, TableRow } from "@mui/material"
 import EditProductDialog from "./EditProductDialog"
 import { deleteProduct } from "@/redux/slices/productSlice"
+import useCategoryState from "@/hooks/CategoryState"
+import { fetchCategories } from "@/redux/slices/categorySlice"
 
 function SingleAdminProduct(props: { product: Product; totalPage: number }) {
   const { product, totalPage } = props
   const dispatch: AppDispatch = useDispatch()
   const [isFormOpen, setIsFormOpen] = useState(false)
+  const [pageNumber, setPageNumber] = useState(1)
+  const [pageSize] = useState(10)
+  const [keyword, setKeyword] = useState("")
+  const [sortBy, setSortBy] = useState<string>("name")
+  const [isAscending, setIsAscending] = useState("true")
+ const { categories} = useCategoryState()
 
   const handleDelete = async (categoryId: string) => {
     try {
@@ -23,6 +31,12 @@ function SingleAdminProduct(props: { product: Product; totalPage: number }) {
       toastError("an error ")
     }
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchCategories({ pageNumber, pageSize, keyword, sortBy, isAscending }))
+    }
+    fetchData()
+  }, [pageNumber, keyword, sortBy, isAscending])
 
   return (
     <TableBody>
@@ -37,7 +51,8 @@ function SingleAdminProduct(props: { product: Product; totalPage: number }) {
         <TableCell sx={{ fontWeight: "medium", fontSize: 16 }} component="th" scope="row">
           {product.productName}
         </TableCell>
-        <TableCell>{product.category?.name}</TableCell>
+        <TableCell>{product.categoryId && 
+        categories.find(c=> c.categoryID === product.categoryId)?.name}</TableCell>
         {/* <td>{product.categories.map((category) => category.name). join(", ")}</td> */}
         <TableCell>{product.description}</TableCell>
         <TableCell>{product.price}</TableCell>

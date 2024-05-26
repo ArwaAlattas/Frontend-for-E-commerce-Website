@@ -89,7 +89,7 @@ setMinPrice(Number(e.target.value))
     setMaxPrice(undefined)
   }
   }
-  console.log(minPrice,maxPrice)
+ 
   return (
     <div className="flex-space-around">
       <PageTitle title="Products" />

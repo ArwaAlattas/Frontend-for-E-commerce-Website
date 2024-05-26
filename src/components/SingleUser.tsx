@@ -5,15 +5,15 @@ import { AppDispatch } from "@/redux/store"
 import { toastError, toastSuccess } from "@/utils/toast"
 import { TableBody, TableCell, TableRow } from "@mui/material"
 import { User } from "@/types"
-import { banUnbanUser } from "@/redux/slices/userSlice"
+import { banUnBanUser } from "@/redux/slices/userSlice"
 
 function SingleUser(props: { user: User; totalPage: number }) {
   const { user, totalPage } = props
   const dispatch: AppDispatch = useDispatch()
 
-  const handleBanUnban = async (userId: string) => {
+  const handleBanUnBan = async (userId: string) => {
     try {
-      userId && (await dispatch(banUnbanUser(userId)))
+      userId && (await dispatch(banUnBanUser(userId)))
       toastSuccess("user updated")
     } catch (error: any) {
       toastError("an error occur ")
@@ -40,7 +40,7 @@ function SingleUser(props: { user: User; totalPage: number }) {
               size="sm"
               variant="delete"
               onClick={() => {
-                handleBanUnban(user.userID)
+                handleBanUnBan(user.userID)
               }}
             >
               {user.isBanned ? "Unban" : "Ban"}

@@ -163,7 +163,6 @@ nav {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  /* gap: 5rem; */
   border-radius: 10px;
   padding: 2rem;
 }
@@ -172,14 +171,6 @@ nav {
     flex-direction: column;
   }
 }
-/* .footer__middle{
-   display: flex;
-  flex-direction: column;
-    justify-content: center;
-  align-content: center;
-  /* align-items: center; */
-/* } */
-
 .footer__left {
   display: flex;
   flex-direction: column;
@@ -221,5 +212,17 @@ nav {
   margin: 0.5rem;
   border-radius: 1rem;
 }
-
+.cart-icon{
+  height: 100%;
+  position: relative;
+}
+.badge {
+  position: absolute;
+  background-color: red;
+ font-size: 15px;
+  border-radius: 10px;
+  top: -16px;
+  right: -13px;
+  padding: 1px 6px;
+}
 /* colors    EFEBE7   FBF7F1   EEEAE6     474543  C6824C */

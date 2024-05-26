@@ -98,7 +98,7 @@ const categorySlice = createSlice({
     builder.addMatcher(
       (action) => action.type.endsWith("/rejected"),
       (state) => {
-        state.error = "An error occured"
+        state.error = "An error occurred"
         state.isLoading = false
       }
     )

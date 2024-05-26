@@ -1,5 +1,4 @@
 import api from "@/api"
-import useCategoryState from "@/hooks/CategoryState"
 import { CreateProductForBackend, ProductState } from "@/types"
 import { getToken } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"

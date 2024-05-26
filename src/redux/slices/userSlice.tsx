@@ -1,8 +1,8 @@
 import api from "@/api"
-import { CreateProductFormData, LoginFormData, UpdateProfileFormData, User, UserState } from "@/types"
+import { LoginFormData, UpdateProfileFormData, User, UserState } from "@/types"
 import { getLocalStorage, getToken, setLocalStorage } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import clsx from "clsx"
+
 
 const data = getLocalStorage("loginData", { userData: null, token: null, isLoggedIn: false })
 
@@ -66,15 +66,15 @@ export const updateUser = createAsyncThunk(
   }
 )
 
-export const banUnbanUser = createAsyncThunk(
-  "users/banUnbanUser",
+export const banUnBanUser = createAsyncThunk(
+  "users/banUnBanUser",
   async (userId: string) => {
-    const response = await api.put(`/users/banUnban/${userId}`,{}, {
+    const response = await api.put(`/users/banUnBan/${userId}`,{}, {
       headers:{
         Authorization: `Bearer ${getToken()}`
       }
     })
-    return response.data //http://localhost:5343/api/users/7d5be7c7-f840-426c-b51f-c85e641bbbb3
+    return response.data 
   }
 )
 
@@ -111,7 +111,7 @@ const userSlice = createSlice({
         isLoggedIn: state.isLoggedIn
       })
     })
-    builder.addCase(banUnbanUser.fulfilled, (state, action) => {
+    builder.addCase(banUnBanUser.fulfilled, (state, action) => {
       const foundUser = state.users.find((user) => user.userID === action.payload.data.userID)
       if(foundUser){
         foundUser.isBanned = action.payload.data.isBanned

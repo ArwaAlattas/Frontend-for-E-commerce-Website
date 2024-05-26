@@ -111,9 +111,13 @@ export type UpdateCategoryFormData = {
     name:string
     description:string  
   }
-// export type Cart = {
-//   cartID: string
-// }
-// export type Order = {
-//   orderID: string
-// }
+export type Cart = {
+  cartID: string
+}
+export type Order = {
+  orderID: string
+}
+export type CartItem = Product & { orderQuantity: number }
+export type CartState = {
+  cartItems: CartItem[]
+}
