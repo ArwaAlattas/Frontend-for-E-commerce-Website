@@ -1,7 +1,6 @@
 import { CartState, Product } from "@/types"
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { useEffect } from "react"
 
 
 
@@ -11,7 +10,7 @@ const data = getLocalStorage("cart", {
 
 
 const initialState: CartState = {
-  cartItems: data.cartItems
+  cartItems: getLocalStorage('cart',[])
 }
 
 

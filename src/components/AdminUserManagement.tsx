@@ -5,15 +5,15 @@ import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@m
 import "../styles/products.css"
 import PageTitle from "@/components/PageTitle"
 import { AppDispatch } from "@/redux/store"
-import Adminsidebar from "./AdminSideBar"
+import AdminSidebar from "./AdminSideBar"
 import useUserState from "@/hooks/UserState"
 import { fetchUsers } from "@/redux/slices/userSlice"
 import SingleUser from "./SingleUser"
 
 const AdminUserManagement = () => {
-  const { users, isLoading, error, totalPages,userData } = useUserState()
+  const { users, isLoading, error, totalPages} = useUserState()
   const dispatch: AppDispatch = useDispatch()
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
@@ -53,7 +53,7 @@ const AdminUserManagement = () => {
 
   return (
     <div className="flex-space-around">
-      <Adminsidebar />
+      <AdminSidebar />
       <div className="main-container">
         <h1 className="text-2xl uppercase mb-1">Users</h1>
         <PageTitle title="Categories" />

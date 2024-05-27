@@ -51,6 +51,7 @@ const Products = () => {
     e.preventDefault
     setKeyword(e.target.value)
   }
+
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     switch (e.target.value) {
       case "NameDEC":
@@ -79,11 +80,12 @@ const Products = () => {
         : [...prevSelected, categoryId]
     )
   }
+
   const handLeMinPriceChange =(e: React.ChangeEvent<HTMLInputElement>) => {
 setMinPrice(Number(e.target.value))
   }
 
- const handLeMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setMaxPrice(Number(e.target.value))
   if(Number(e.target.value) === 0){
     setMaxPrice(undefined)
@@ -175,7 +177,7 @@ setMinPrice(Number(e.target.value))
                   type="text"
                   name="max-price"
                   id="max-price"
-                  onChange={handLeMaxPriceChange}
+                  onChange={handleMaxPriceChange}
                 />
               </label>
               $

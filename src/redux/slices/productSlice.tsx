@@ -48,17 +48,7 @@ export const fetchProducts = createAsyncThunk(
     if(maxPrice !== undefined){
       params.append( "maxPrice", maxPrice.toString())
     }
-    //maxPrice
     const response = await api.get ("/products" , { params })
-    // const response =
-    //   keyword.length > 0
-    //     ? await api.get(
-    //         `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&keyword=${keyword}&sortBy=${sortBy}&isAscending=${isAscending}`
-    //       )
-    //     : await api.get(
-    //         `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&isAscending=${isAscending}`
-    //       )
-    //http://localhost:5343/api/products?SelectedCategories=842d7a97-b1ef-446e-a847-35580c74c128&SelectedCategories=7f1a3881-78be-4247-a018-856433accdfb&minPrice=20
     return response.data
   }
 )

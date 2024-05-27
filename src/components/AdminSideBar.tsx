@@ -9,7 +9,7 @@ import WidgetsIcon from "@mui/icons-material/Widgets"
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import { Box} from "@mui/material"
 
-const Adminsidebar = () => {
+const AdminSidebar = () => {
   const { userData } = useSelector((state: RootState) => state.userR)
   return (
     <aside className="sidebar-container ">
@@ -69,4 +69,4 @@ const Adminsidebar = () => {
     </aside>
   )
 }
-export default Adminsidebar
+export default AdminSidebar

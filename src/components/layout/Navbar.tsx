@@ -1,14 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
 
-import "../styles/App.css"
-import { AppDispatch} from '@/redux/store';
-import { logoutUser } from '@/redux/slices/userSlice';
+
+import "@/styles/App.css"
 import MenuTransitions from '@/components/SidBarBurgerMenu';
 import CartIcon from '@/components/CartIcon';
 import useCartState from '@/hooks/CartState';
-import useUserState from '@/hooks/UserState';
-
 
 
 const NavBar = () => {

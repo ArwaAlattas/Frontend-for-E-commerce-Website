@@ -8,7 +8,7 @@ import { User } from "@/types"
 import { banUnBanUser } from "@/redux/slices/userSlice"
 
 function SingleUser(props: { user: User; totalPage: number }) {
-  const { user, totalPage } = props
+  const { user} = props
   const dispatch: AppDispatch = useDispatch()
 
   const handleBanUnBan = async (userId: string) => {
@@ -43,7 +43,7 @@ function SingleUser(props: { user: User; totalPage: number }) {
                 handleBanUnBan(user.userID)
               }}
             >
-              {user.isBanned ? "Unban" : "Ban"}
+              {user.isBanned ? "UnBan" : "Ban"}
             </Button>
           </div>
         </TableCell>
