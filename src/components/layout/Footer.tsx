@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <div className="footer">
+    <div className="footer mt-5" id="footer" >
     <footer className="footer-top">
       <div className="footer__left">
         <Link to={"/shippingInfo" }>
         Shipping and returns
         </Link>
         <Link to={'/terms' }>
-        Terms, Conditions and Privacy
+        Conditions and Privacy
         </Link>
         <Link to="/about">About Us</Link>
       </div>

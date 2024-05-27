@@ -24,9 +24,11 @@ import AdminRoute from "./AdminRoute"
 import AdminProductsManagement from "@/components/AdminProductsManagement"
 import AdminUserManagement from "@/components/AdminUserManagement"
 import AdminOrdersManagement from "@/components/AdminOrdersManagement"
+import { ScrollProvider } from "@/components/ScrollContext"
 
 const Index = () => {
   return (
+   <ScrollProvider>
     <BrowserRouter>
       <Routes>
         <Route
@@ -41,15 +43,15 @@ const Index = () => {
           }
         >
           <Route path="/dashboard" element={<ProtectedRoute />}>
-            <Route path="user" element={<UserDashboard />} />
+            {/* <Route path="user" element={<UserDashboard />} /> */}
             <Route path="user/profile" element={<UserProfile />} />
             <Route path="user/orders" element={<UserOrders />} />
           </Route>
 
           <Route path="/dashboard" element={<AdminRoute />}>
-            <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/categories" element={<AdminCategories />} />
+            {/* <Route path="admin" element={<AdminDashboard />} /> */}
             <Route path="admin/products" element={<AdminProductsManagement />} />
+            <Route path="admin/categories" element={<AdminCategories />} />
             <Route path="admin/users" element={<AdminUserManagement />} />
             <Route path="admin/orders" element={<AdminOrdersManagement />} />
           </Route>
@@ -68,6 +70,7 @@ const Index = () => {
         <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
+    </ScrollProvider>
   )
 }
 

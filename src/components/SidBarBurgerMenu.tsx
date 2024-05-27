@@ -26,22 +26,6 @@ export default function MenuTransitions() {
       console.log(`Clicked on ${menuItem}`)
     }
   }
-  //   {isLoggedIn &&
-  //     <>
-  //      <Link className='nav__link' to="/">Products</Link>
-  //   <Link className='nav__link' to="/dashboard">Dashboard</Link>
-  //   <Link className='nav__link ' to="/register"><ShoppingCartOutlinedIcon/></Link>
-  //      <Link className='nav__link ' to="/" onClick={handleLogout}><LogoutIcon/></Link>
-  //      < MenuTransitions/>
-  //     </>}
-  //     {!isLoggedIn && <>
-  //     <Link  to="/">Products</Link>
-  //   <Link className='nav__link' to="/dashboard">Dashboard</Link>
-  //   <Link className='nav__link ' to="/register"><ShoppingCartOutlinedIcon/></Link>
-  //   <Link className='nav__link ' to="/register"><AccountCircleOutlinedIcon/></Link>
-
-  //  < MenuTransitions/>
-  //     </>}
   return (
     <Dropdown>
       <MenuButton>
@@ -53,7 +37,7 @@ export default function MenuTransitions() {
             <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
             <MenuItem
               onClick={() =>
-                navigate(`/dashboard/${userData && userData.isAdmin ? "admin" : "user"}`)
+                navigate(`/dashboard/${userData && userData.isAdmin ? "admin/products" : "user/profile"}`)
               }
             >
               My Dashboard

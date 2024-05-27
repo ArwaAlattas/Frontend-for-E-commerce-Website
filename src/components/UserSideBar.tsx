@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { Box} from "@mui/material"
 
-const Usersidebar = () => {
+const UserSideBar = () => {
   const { userData } = useSelector((state: RootState) => state.userR)
   return (
     <aside className="sidebar-container">
@@ -12,7 +12,7 @@ const Usersidebar = () => {
         rootStyles={{
           [`.${sidebarClasses.container}`]: {
             // backgroundColor: 'red',
-            borderRadius: "10px"
+            // borderRadius: "10px"
           }
         }} >
         <Menu
@@ -29,7 +29,7 @@ const Usersidebar = () => {
                 }
             } 
           }}
-          style={{borderRadius:"10px"}} 
+          // style={{borderRadius:"10px"}} 
         >
            <Box   alignItems="center"display="flex" flexDirection="column" gap={1}  my={2}>
             <img src={userData?.imgUrl} alt={userData?.username} className="round-image" />
@@ -43,4 +43,4 @@ const Usersidebar = () => {
     </aside>
   )
 }
-export default Usersidebar
+export default UserSideBar

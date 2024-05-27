@@ -36,24 +36,26 @@ const theme = createTheme({
 })
 
 export default function CreateProductDialog() {
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
-  const [keyword, setKeyword] = useState("")
-  const [sortBy, setSortBy] = useState<string>("name")
-  const [isAscending, setIsAscending] = useState("true")
+  const [keyword] = useState("")
+  const [sortBy] = useState<string>("name")
+  const [isAscending] = useState("true")
   const [open, setOpen] = useState(true)
   const dispatch: AppDispatch = useDispatch()
   const cancelButtonRef = useRef(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  const { categories, isLoading, error, totalPages, category } = useCategoryState()
-
+  const { categories } = useCategoryState()
+// const watchedCategoryIds = watch("categoryId")
   const {
     register,
     handleSubmit,
     control,
     formState: { errors }
   } = useForm<CreateProductFormData>()
-  // const watchedCategoryIds = watch("categoryId")
+
+  
+  
   const onSubmit: SubmitHandler<CreateProductFormData> = async (data) => {
     try {
       let imageUrl = " "
@@ -66,6 +68,7 @@ export default function CreateProductDialog() {
         ...data,
         imgUrl: imageUrl
       }
+
       const response = await dispatch(createProduct(productData))
       toastSuccess(response.payload.mes)
     } catch (error: any) {
@@ -75,6 +78,8 @@ export default function CreateProductDialog() {
 
     setOpen(false)
   }
+
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {

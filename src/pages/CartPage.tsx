@@ -319,24 +319,7 @@ if(cartItems.length > 0 && paymentMethod){
                   </FormControl>
                 </div>
                 </form>
-                <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
-                  Promo Code
-                </label>
-                <div className="flex pb-4 w-full">
-                  <div className="relative w-full ">
-                    <div className=" absolute left-0 top-0 py-2.5 px-4 text-gray-300"></div>
-                    <input
-                      type="text"
-                      className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                      placeholder="xxxx xxxx xxxx"
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center border-b border-gray-300">
-                  <button className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/80">
-                    Apply
-                  </button>
-                </div>
+           
                 <div className="flex items-center justify-between py-8">
                   <p className="font-medium text-xl leading-8 text-black">{cartItems && cartItems.length > 0 ? cartItemsTotal() : 0} Items</p>
                   <p className="font-semibold text-xl leading-8 text-[#c6824c]">{cartTotal(45)}</p>

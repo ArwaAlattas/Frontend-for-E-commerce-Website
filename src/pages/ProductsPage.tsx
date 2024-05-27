@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import FilterListIcon from "@mui/icons-material/FilterList"
-import { Menu, MenuItem, Sidebar, SubMenu, sidebarClasses } from "react-pro-sidebar"
-import { Box } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Menu,  Sidebar, SubMenu, sidebarClasses } from "react-pro-sidebar"
 import CategoryIcon from "@mui/icons-material/Category"
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney"
 
@@ -18,18 +16,19 @@ import useCategoryState from "@/hooks/CategoryState"
 import { fetchCategories } from "@/redux/slices/categorySlice"
 
 const Products = () => {
-  const { products, isLoading, error, totalPages, product } = useProductState()
+  const { products, isLoading, error, totalPages} = useProductState()
   const { categories } = useCategoryState()
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize] = useState(5)
+  const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState("name")
   const [isAscending, setIsAscending] = useState("true")
-  const [isExpanded, setIsExpanded] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(false)
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,10 +90,33 @@ setMinPrice(Number(e.target.value))
     setMaxPrice(undefined)
   }
   }
- 
   return (
+  <div>
+      <div className="flex w-full bg-[#efebe7] h-400 justify-center">   
+        <div className="mx-auto max-w-1xl py-32 sm:py-38 lg:py-10 ">
+          
+          <div className="text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-[#272e26] sm:text-6xl">
+            Community <span><img  className="inline align-middle" src="https://res.cloudinary.com/arwa-cloud/image/upload/v1716556282/e-commerce/a09fd9dxihehfgcopjaj.png"  width={50} height={50} alt="logo"/></span>f  Coffee Experts 
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-[#272e26]">
+            Sometimes we find ourselves in a tricky situation: urgently need coffee but have no brewing tools in hand.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <a
+                href="#"
+                className="rounded-md bg-[#c6824c] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#272e26] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Get started
+              </a>
+              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                Learn more <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div></div>
     <div className="flex-space-around">
-      <PageTitle title="Products" />
+      <PageTitle title="Home" />
       <aside className="sidebar-container">
         <Sidebar
           collapsed={!isExpanded}
@@ -104,10 +126,10 @@ setMinPrice(Number(e.target.value))
               borderRadius: "10px"
             }
           }}
-          style={{ height: "100vh" }}
+         style={{ height: "100%" }}
         >
           <Menu
-            className="menu"
+            className="menu "
             menuItemStyles={{
               button: ({ level, active, disabled }) => {
                 if (level === 0)
@@ -120,27 +142,14 @@ setMinPrice(Number(e.target.value))
                   }
               }
             }}
-            style={{ borderRadius: "10px" }}
+            style={{ borderRadius: "10px"}}
           >
-            <Box
-              alignItems="center"
-              display="flex"
-              flexDirection="column"
-              gap={1}
-              my={2}
-              height={100}
-            >
-              {/* <img src={userData?.imgUrl} alt={userData?.username} className="round-image" /> */}
-            </Box>
-            {/* <MenuItem component={<Link to="/dashboard/user/profile" />}>
-              Filter by Categories
-            </MenuItem> */}
-            <SubMenu icon={<CategoryIcon />} label="Filter by Categories">
+            <SubMenu icon={<CategoryIcon />} label={!isExpanded ? null : "Filter by Categories"}>
               {categories &&
                 categories.length > 0 &&
                 categories.map((category) => (
                   <div key={category.categoryID}>
-                    <label htmlFor="catgeories">
+                    <label htmlFor="categories">
                       <input
                         type="checkbox"
                         checked={selectedCategories.includes(category.categoryID)}
@@ -153,7 +162,7 @@ setMinPrice(Number(e.target.value))
                   </div>
                 ))}
             </SubMenu>
-            <SubMenu icon={<AttachMoneyIcon />} label="Filter by price">
+            <SubMenu icon={<AttachMoneyIcon />} label={!isExpanded ? null : "Filter by Price"}>
           <div className="flex p-4 gap-2">
           <div  className="flex border rounded-lg p-1 ">
             <label htmlFor="min-price">
@@ -188,7 +197,7 @@ setMinPrice(Number(e.target.value))
           </Menu>
         </Sidebar>
       </aside>
-      <div className="main-container">
+      <div className={!isExpanded ? "flex  flex-col items-center p-4 justify-items-start h-screen content-start h-auto justify-start w-full": "main-container"}>
         <h1 className="text-2xl uppercase mb-1">Products</h1>
         {isLoading && <p>Loading ... </p>}
         {error && <p className="text-red-500">Error{error}</p>}
@@ -253,6 +262,7 @@ setMinPrice(Number(e.target.value))
         </div>
       </div>
     </div>
+  </div>
   )
 }
 
