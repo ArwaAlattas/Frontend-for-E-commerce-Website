@@ -42,7 +42,6 @@ export default function MenuTransitions() {
             >
               My Dashboard
             </MenuItem>
-            {/* <MenuItem onClick={createHandleMenuClick('Profile')}>Profile</MenuItem> */}
             <MenuItem onClick={handleLogout}>Log out</MenuItem>
           </>
         )}
