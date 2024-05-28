@@ -12,23 +12,27 @@ import useCategoryState from "@/hooks/CategoryState"
 import { fetchCategories } from "@/redux/slices/categorySlice"
 
 function SingleAdminProduct(props: { product: Product; totalPage: number }) {
-  const { product, totalPage } = props
+  const { product} = props
   const dispatch: AppDispatch = useDispatch()
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
-  const [keyword, setKeyword] = useState("")
-  const [sortBy, setSortBy] = useState<string>("name")
-  const [isAscending, setIsAscending] = useState("true")
+  const [keyword] = useState("")
+  const [sortBy] = useState<string>("name")
+  const [isAscending] = useState("true")
  const { categories} = useCategoryState()
 
   const handleDelete = async (categoryId: string) => {
     try {
       await dispatch(deleteProduct(categoryId))
       // window.location.reload;
-      toastSuccess("category is deleted")
-    } catch (error: any) {
-      toastError("an error ")
+      toastSuccess("Product is deleted")
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toastError(`An error occurred: ${error.message}`);
+      } else {
+        toastError("An unknown error occurred");
+      }
     }
   }
   useEffect(() => {
@@ -39,7 +43,7 @@ function SingleAdminProduct(props: { product: Product; totalPage: number }) {
   }, [pageNumber, keyword, sortBy, isAscending])
 
   return (
-    <TableBody>
+    <TableBody >
       <TableRow
         key={product.productID}
         sx={{ "&:last-child td ,&:last-child th": { border: 1, borderColor: "#EFEBE7" } }}

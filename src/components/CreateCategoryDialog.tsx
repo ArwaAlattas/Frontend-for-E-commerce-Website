@@ -7,7 +7,7 @@ import { Button } from "./ui/button"
 import { CreateCategoryFormData } from "@/types"
 import { createCategory } from "@/redux/slices/categorySlice"
 import { AppDispatch } from "@/redux/store"
-import { toastSuccess } from "@/utils/toast"
+import { toastError, toastSuccess } from "@/utils/toast"
 
 export default function CreateCategoryDialog() {
   const [open, setOpen] = useState(true)
@@ -21,11 +21,15 @@ export default function CreateCategoryDialog() {
 
   const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data) => {
     try {
-      const response = await dispatch(createCategory(data))
+       await dispatch(createCategory(data))
       toastSuccess("Category Created successfully")
       console.log(data)
-    } catch (error: any) {
-      console.log(error)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toastError(`An error occurred: ${error.message}`);
+      } else {
+        toastError("An unknown error occurred");
+      }
     }
     setOpen(false)
   }

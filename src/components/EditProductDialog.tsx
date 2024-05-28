@@ -36,12 +36,12 @@ const theme = createTheme({
 export default function EditProductDialog(props: { product: Product }) {
   const { product } = props
   const [open, setOpen] = useState(true)
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
-  const [keyword, setKeyword] = useState("")
-  const [sortBy, setSortBy] = useState<string>("name")
-  const [isAscending, setIsAscending] = useState("true")
-  const { categories, isLoading, error, totalPages, category } = useCategoryState()
+  const [keyword] = useState("")
+  const [sortBy] = useState<string>("name")
+  const [isAscending] = useState("true")
+  const { categories} = useCategoryState()
   const dispatch: AppDispatch = useDispatch()
   const cancelButtonRef = useRef(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -89,9 +89,12 @@ export default function EditProductDialog(props: { product: Product }) {
       }
       const response = await dispatch(updateProducts({ productId: product.productID, updateProduct:productData }))
       toastSuccess(response.meta.requestStatus)
-    } catch (error: any) {
-      console.log("Product creation failed")
-      toastError("Product creation failed")
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toastError(`An error occurred: ${error.message}`);
+      } else {
+        toastError("An unknown error occurred");
+      }
     }
     setOpen(false)
   }

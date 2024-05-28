@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import FilterListIcon from "@mui/icons-material/FilterList"
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
-import { Sidebar, SubMenu, sidebarClasses } from "react-pro-sidebar"
-import CategoryIcon from "@mui/icons-material/Category"
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney"
 
 import "../styles/products.css"
 import PageTitle from "@/components/PageTitle"
@@ -25,7 +21,6 @@ const Products = () => {
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState("name")
   const [isAscending, setIsAscending] = useState("true")
-  const [isExpanded, setIsExpanded] = useState(false)
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
@@ -260,9 +255,9 @@ const Products = () => {
               </div>
             </div>
             {/* sorting feature */}
-            <div>
+            <div >
               <select
-                className="rounded-lg p-2 bg-[#efebe7]  hover:bg-accent hover:text-accent-foreground"
+                className="rounded-lg p-2 bg-[#efebe7]  hover:bg-accent  hover:text-accent-foreground"
                 name="Sort"
                 defaultValue={"DEFAULT"}
                 onChange={handleSortChange}
@@ -270,12 +265,12 @@ const Products = () => {
                 <option value="DEFAULT" disabled hidden>
                   Sort
                 </option>
-                <optgroup label="By Name">
+                <optgroup  label="By Name">
                   <option value="NameASC">A to Z</option>
                   <option value="NameDEC">Z to A </option>
                 </optgroup>
-                <optgroup label="By Price">
-                  <option value="PriceDEC">High to Low</option>
+                <optgroup  label="By Price">
+                  <option  value="PriceDEC">High to Low</option>
                   <option value="PriceASC">Low to High</option>
                 </optgroup>
               </select>

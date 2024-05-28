@@ -13,7 +13,6 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Select,
   TextField,
   ThemeProvider,
   Typography,
@@ -70,10 +69,13 @@ export default function CreateProductDialog() {
       }
 
       const response = await dispatch(createProduct(productData))
-      toastSuccess(response.payload.mes)
-    } catch (error: any) {
-      console.log("Product creation failed")
-      toastError("Product creation failed")
+      toastSuccess(response.payload.message)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toastError(`An error occurred: ${error.message}`);
+      } else {
+        toastError("An unknown error occurred");
+      }
     }
 
     setOpen(false)

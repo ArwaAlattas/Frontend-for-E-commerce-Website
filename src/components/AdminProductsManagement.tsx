@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { useForm } from "react-hook-form"
 import AddIcon from "@mui/icons-material/Add"
-import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
+import { Paper, Table, TableCell, TableContainer, TableHead, TableRow, makeStyles } from "@mui/material"
 
 import PageTitle from "@/components/PageTitle"
+import "@/styles/App.css"
 import { AppDispatch } from "@/redux/store"
 import { Button } from "@/components/ui/button"
 import Adminsidebar from "./AdminSideBar"
-import { CreateProductFormData } from "@/types"
 import useProductState from "@/hooks/ProductState"
 import SingleAdminProduct from "./SingleAdminProduct"
 import { fetchProducts } from "@/redux/slices/productSlice"
 import CreateProductDialog from "./CreatProductDialog"
 
+
 const AdminProductsManagement = () => {
+
   const { products, isLoading, error, totalPages } = useProductState()
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber] = useState(1)
@@ -111,8 +112,8 @@ const AdminProductsManagement = () => {
         {isFormOpen && <CreateProductDialog />}
 
         <hr className="line" />
-        <TableContainer component={Paper}>
-          <Table sx={{ mainWidth: 650, borderRadius: 10 }} aria-label="simple table">
+       <TableContainer component={Paper} >
+          <Table className="table"  sx={{ borderRadius: 10 }}aria-label="simple table">
             <TableHead sx={{ bgcolor: "#EFEBE7", fontSize: 34, fontWeight: "medium" }}>
               <TableRow>
                 <TableCell sx={{ fontSize: 18, fontWeight: "medium" }}>Image</TableCell>

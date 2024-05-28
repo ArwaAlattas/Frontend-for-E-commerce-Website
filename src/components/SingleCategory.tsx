@@ -10,7 +10,7 @@ import EditCategoryDialog from "./EditCategoryDialog"
 import { TableBody, TableCell, TableRow } from "@mui/material"
 
 function SingleCategory(props: { category: Category; totalPage: number }) {
-  const { category, totalPage } = props
+  const { category,} = props
   const dispatch: AppDispatch = useDispatch()
   const [isFormOpen, setIsFormOpen] = useState(false)
 
@@ -19,8 +19,12 @@ function SingleCategory(props: { category: Category; totalPage: number }) {
       await dispatch(deleteCategory(categoryId))
       // window.location.reload;
       toastSuccess("category is deleted")
-    } catch (error: any) {
-      toastError("an error ")
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toastError(`An error occurred: ${error.message}`);
+      } else {
+        toastError("An unknown error occurred");
+      }
     }
   }
 

@@ -1,12 +1,11 @@
 import { RootState } from "@/redux/store"
-import { Menu, MenuItem, Sidebar, SubMenu, sidebarClasses } from "react-pro-sidebar"
+import { Menu, MenuItem, Sidebar,sidebarClasses } from "react-pro-sidebar"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import CategoryIcon from "@mui/icons-material/Category"
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout"
 import GroupIcon from "@mui/icons-material/Group"
 import WidgetsIcon from "@mui/icons-material/Widgets"
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined"
 import { Box} from "@mui/material"
 
 const AdminSidebar = () => {
@@ -34,6 +33,7 @@ const AdminSidebar = () => {
             button: ({ level, active, disabled }) => {
               if (level === 0)
                 return {
+                 
                   color: disabled ? "#f5d9ff" : "#c6824c",
                   backgroundColor: active ? "#eecef9" : "undefined",
                   "&:hover": {

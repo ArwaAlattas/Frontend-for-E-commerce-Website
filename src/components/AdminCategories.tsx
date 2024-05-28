@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { useForm } from "react-hook-form"
 import AddIcon from "@mui/icons-material/Add"
 import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 
@@ -8,29 +7,23 @@ import "../styles/products.css"
 import PageTitle from "@/components/PageTitle"
 import { AppDispatch } from "@/redux/store"
 import { Button } from "@/components/ui/button"
-import Adminsidebar from "./AdminSideBar"
+import AdminSidebar from "./AdminSideBar"
 import useCategoryState from "@/hooks/CategoryState"
 import { fetchCategories } from "@/redux/slices/categorySlice"
 import SingleCategory from "./SingleCategory"
-import { CreateCategoryFormData } from "@/types"
-import CreateCategoryDialog from "./CreatCategoryDialog"
+import CreateCategoryDialog from "./CreateCategoryDialog"
 
 const AdminCategories = () => {
-  const { categories, isLoading, error, totalPages, category } = useCategoryState()
+  const { categories, isLoading, error, totalPages} = useCategoryState()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<CreateCategoryFormData>()
 
   const dispatch: AppDispatch = useDispatch()
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
   const [isAscending, setIsAscending] = useState("true")
-  const [isFormOpen, setisFormOpen] = useState(false)
+  const [isFormOpen, setIsFormOpen] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +59,7 @@ const AdminCategories = () => {
 
   return (
     <div className="flex-space-around">
-      <Adminsidebar />
+      <AdminSidebar />
       <div className="main-container">
         <h1 className="text-2xl uppercase mb-1">Admin Categories</h1>
         <PageTitle title="Categories" />
@@ -106,7 +99,7 @@ const AdminCategories = () => {
             <Button
               className="h-8"
               onClick={() => {
-                setisFormOpen(!isFormOpen)
+                setIsFormOpen(!isFormOpen)
               }}
             >
               <AddIcon />

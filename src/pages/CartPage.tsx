@@ -18,7 +18,7 @@ import { Button } from "../components/ui/button"
 import { CartItem} from "@/types"
 import { useState } from "react"
 import { createOrder } from "@/redux/slices/orderSlice"
-import { toastSuccess } from "@/utils/toast"
+import { toastError, toastSuccess } from "@/utils/toast"
 
 
 function CartPage() {
@@ -62,11 +62,19 @@ const [paymentMethod,setPaymentMethod] = useState(0)
       navigate("/login")
     }
 if(cartItems.length > 0 && paymentMethod){
- const res = await dispatch(createOrder( {
-    cartItems:cartItems,
-    paymentMethod:paymentMethod
-   }))
-  toastSuccess(res.payload.message)
+  try {
+    await dispatch(createOrder( {
+      cartItems:cartItems,
+      paymentMethod:paymentMethod
+     }))
+    toastSuccess("Your Order is Created")
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      toastError(`An error occurred: ${error.message}`);
+    } else {
+      toastError("An unknown error occurred");
+    }
+  }
 }
   
     //  navigate("/dashboard/user/orders ")
