@@ -12,7 +12,7 @@ const initialState: OrderState = {
 
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
-  async ({ cartItems, paymentMethod }: { cartItems: CartItem[]; paymentMethod: number }) => {
+  async ({ cartItems, paymentMethod }: { cartItems: CartItem[], paymentMethod: number }) => {
     const params = new URLSearchParams({
       paymentMethod:paymentMethod.toString()
     })
@@ -20,17 +20,17 @@ export const createOrder = createAsyncThunk(
     //   params.append("paymentMethod", paymentMethod.toString())
     // }
     cartItems.forEach((product) => {
-      params.append("productIds", product.productID.toString())
+      params.append("productIds", product.productID)
     })
 
     console.log(params.toString())
 
-    const response = await api.post("/orders", {params}, {
+    const response = await api.post("/orders", params, {
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
     })
-    console.log(response.status)
+    console.log(response.data)
     return response.data
   }
 )

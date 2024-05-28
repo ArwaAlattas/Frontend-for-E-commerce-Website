@@ -61,12 +61,14 @@ const [paymentMethod,setPaymentMethod] = useState(0)
     if (!isLoggedIn) {
       navigate("/login")
     }
-if(cartItems.length > 0 && paymentMethod){
+if(cartItems.length > 0 ){
   try {
     await dispatch(createOrder( {
       cartItems:cartItems,
       paymentMethod:paymentMethod
      }))
+     console.log(cartItems)
+     console.log(paymentMethod)
     toastSuccess("Your Order is Created")
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -78,7 +80,7 @@ if(cartItems.length > 0 && paymentMethod){
 }
   
     //  navigate("/dashboard/user/orders ")
-  }
+   }
   const handleIncrementQuantity = (productId?: string) => {
     if (productId) {
       dispatch(incrementQuantity(productId))
@@ -318,10 +320,10 @@ if(cartItems.length > 0 && paymentMethod){
                       name="radio-buttons-group"
                       onChange={(e)=>setPaymentMethod(Number(e.target.value))}
                     >
-                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200" value="0" control={<Radio />} label="CreditCard Payment" />
-                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200"value="1" control={<Radio />} label="ApplePay Payment" />
-                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200" value="2" control={<Radio />} label="Visa Payment" />
-                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200" value="3" control={<Radio />} label="Payment Delivery" /> 
+                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200" value={0} control={<Radio />} label="CreditCard Payment" />
+                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200"value={1} control={<Radio />} label="ApplePay Payment" />
+                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200" value={2} control={<Radio />} label="Visa Payment" />
+                      <FormControlLabel className="pb-2 w-full pt-1 border-b border-gray-200" value={3}control={<Radio />} label="Payment Delivery" /> 
                       <FormControlLabel className="pb-2 w-full pt-1" value="4" control={<Radio />} label="PayPal Payment" />
                     </RadioGroup>
                   </FormControl>
