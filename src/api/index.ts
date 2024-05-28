@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { config } from 'process'
 
 const isDevelopment = import.meta.env.MODE === 'development'
 let baseURL = 'https://e-commerce-application-api-nxd1.onrender.com/api'

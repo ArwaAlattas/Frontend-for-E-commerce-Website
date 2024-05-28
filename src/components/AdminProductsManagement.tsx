@@ -15,17 +15,17 @@ import { fetchProducts } from "@/redux/slices/productSlice"
 import CreateProductDialog from "./CreatProductDialog"
 
 const AdminProductsManagement = () => {
-  const { products, isLoading, error, totalPages, product } = useProductState()
+  const { products, isLoading, error, totalPages } = useProductState()
   const dispatch: AppDispatch = useDispatch()
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
   const [isAscending, setIsAscending] = useState("true")
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-  const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
-  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
+  const [selectedCategories] = useState<string[]>([])
+  const [minPrice] = useState<number | undefined>(undefined)
+  const [maxPrice] = useState<number | undefined>(undefined)
 
   useEffect(() => {
     const fetchData = async () => {

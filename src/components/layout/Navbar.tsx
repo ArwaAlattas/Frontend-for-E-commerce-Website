@@ -15,11 +15,15 @@ const NavBar = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: `/dashboard/${isLoggedIn && userData && userData.isAdmin ? 'admin/products' : 'user/profile'}` },
+    { name: 'Products', href: `/dashboard/admin/products` },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '#' }, 
   ];
-
+  const navigation2 = [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact', href: '#' }, 
+  ];
   return (
     <div className='header'>
       <div>
@@ -32,16 +36,43 @@ const NavBar = () => {
       <header className="inset-x-0 top-0">
         <div className="flex items-center justify-center p-6 lg:px-8" aria-label="Global">
           <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={item.name === 'Contact' ? (e) => { e.preventDefault(); scrollToFooter(); } : undefined}
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                {item.name}
-              </a>
-            ))}
+          {isLoggedIn && userData && userData.isAdmin &&(
+          navigation.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={item.name === 'Contact' ? (e) => { e.preventDefault(); scrollToFooter(); } : undefined}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              {item.name}
+            </a>
+          ))
+        )}
+         {isLoggedIn && userData && !userData.isAdmin &&(
+          navigation2.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={item.name === 'Contact' ? (e) => { e.preventDefault(); scrollToFooter(); } : undefined}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              {item.name}
+            </a>
+          ))
+        )}
+        {!isLoggedIn && (
+          navigation2.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={item.name === 'Contact' ? (e) => { e.preventDefault(); scrollToFooter(); } : undefined}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              {item.name}
+            </a>
+          ))
+        )}
+           
           </div>
         </div>
       </header>
