@@ -15,7 +15,7 @@ const NavBar = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: `/dashboard/${isLoggedIn && userData && userData.isAdmin ? 'admin' : 'user'}` },
+    { name: 'Products', href: `/dashboard/${isLoggedIn && userData && userData.isAdmin ? 'admin/products' : 'user/profile'}` },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '#' }, 
   ];
