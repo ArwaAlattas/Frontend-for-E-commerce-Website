@@ -8,26 +8,31 @@ import useCartState from '@/hooks/CartState';
 import useUserState from '@/hooks/UserState';
 import { ScrollContext } from '../ScrollContext';
 
+interface NavigationItem {
+  name: string;
+  path: string;
+}
+
 const NavBar = () => {
   const { isLoggedIn, userData } = useUserState();
   const { scrollToFooter } = useContext(ScrollContext);
   const { cartItems } = useCartState();
   const navigate = useNavigate();
 
-  const navigation = [
+  const navigation: NavigationItem[] = [
     { name: 'Home', path: '/' },
     { name: 'Products', path: '/dashboard/admin/products' },
     { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '#' }, 
+    { name: 'Contact', path: '#' },
   ];
 
-  const navigation2 = [
+  const navigation2: NavigationItem[] = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '#' }, 
+    { name: 'Contact', path: '#' },
   ];
 
-  const handleNavigation = (path, name) => {
+  const handleNavigation = (path: string, name: string) => {
     if (name === 'Contact') {
       scrollToFooter();
     } else {
