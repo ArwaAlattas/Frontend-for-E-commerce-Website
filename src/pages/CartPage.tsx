@@ -21,6 +21,7 @@ import { createOrder } from "@/redux/slices/orderSlice"
 import { toastError, toastSuccess } from "@/utils/toast"
 
 
+
 function CartPage() {
   const { cartItems } = useCartState()
   const { isLoggedIn } = useUserState()
@@ -67,9 +68,8 @@ if(cartItems.length > 0 ){
       cartItems:cartItems,
       paymentMethod:paymentMethod
      }))
-     console.log(cartItems)
-     console.log(paymentMethod)
     toastSuccess("Your Order is Created")
+    dispatch(removeAllFromCart())
   } catch (error: unknown) {
     if (error instanceof Error) {
       toastError(`An error occurred: ${error.message}`);
@@ -79,7 +79,6 @@ if(cartItems.length > 0 ){
   }
 }
   
-    //  navigate("/dashboard/user/orders ")
    }
   const handleIncrementQuantity = (productId?: string) => {
     if (productId) {

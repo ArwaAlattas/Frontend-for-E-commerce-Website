@@ -34,12 +34,12 @@ function AdminOrdersManagement() {
           <Table  sx={{ mainWidth: 650 }} aria-label="simple table">
             <TableHead sx={{ bgcolor: '#EFEBE7' ,fontSize: 34, fontWeight: 'medium' }} >
               <TableRow>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center" >Order Id</TableCell>
+              <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center" >User Id</TableCell>
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">Status</TableCell>
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">Payment Methods</TableCell>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">User Id</TableCell>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center">Total Amount</TableCell>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center">Products</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">Added date</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center"> Total amount</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center">Number of Products </TableCell>
               </TableRow>
             </TableHead>
             {orders &&

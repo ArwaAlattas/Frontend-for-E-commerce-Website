@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { TableBody, TableCell, TableRow } from "@mui/material"
+import { format } from 'date-fns';
 
 import { Order } from "@/types"
 import { AppDispatch } from "@/redux/store"
@@ -25,6 +26,10 @@ function SingleOrder(props: { order: Order }) {
   const [minPrice] = useState<number | undefined>(undefined)
   const [maxPrice] = useState<number | undefined>(undefined)
 
+ const formattingDate = (dateTimeString:string) =>{
+  const date = new Date(dateTimeString);
+  return format(date, 'MM/dd/yyyy hh:mm aa');
+ }
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchUsers({ pageNumber, pageSize, keyword, sortBy, isAscending }))
@@ -86,16 +91,15 @@ function SingleOrder(props: { order: Order }) {
         sx={{ "&:last-child td ,&:last-child th": { border: 1, borderColor: "#EFEBE7" } }}
       >
         <TableCell sx={{ fontWeight: "medium", fontSize: 16 }} component="th" scope="row">
-          {order.orderId}
+        {order.userId}
         </TableCell>
         <TableCell align="center">{nameOfStatus(order.status)}</TableCell>
         <TableCell align="center">{nameOfPaymentMethod(order.payment)}</TableCell>
         <TableCell align="center">
-          {/* {users &&  users.find(u=> u.userID === order.userId)?.username} */}
-          {order.userId}
+          {formattingDate(order.createdAt)}
         </TableCell>
         <TableCell align="center">{order.amount}</TableCell>
-        <TableCell align="center">{order.products?.length}</TableCell>
+        <TableCell align="center">{order.products?.length} items</TableCell>
       </TableRow>
     </TableBody>
   )
