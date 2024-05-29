@@ -70,7 +70,7 @@ const orderSlice = createSlice({
       state.isLoading = false
     })
 
-      builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
+      builder.addCase(fetchUserOrders.fulfilled,(state, action) => {
         state.orders = action.payload.data
         state.isLoading = false
       })

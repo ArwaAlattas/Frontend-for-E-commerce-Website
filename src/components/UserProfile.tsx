@@ -43,8 +43,8 @@ function UserProfile() {
           <>
             <img src={userData.imgUrl} alt={userData.username} className="round-image" />
             <h3>Name: {userData.username}</h3>
-            <h3>First Name: {userData.firstName}</h3>
-            <h3>Last Name: {userData.lastName}</h3>
+            <p>First Name: {userData.firstName}</p>
+            <p>Last Name: {userData.lastName}</p>
             <p>Email: {userData.email}</p>
             <p>Phone Number: {userData.phoneNumber}</p>
             <p>Birth Date: {userData.birthDate}</p>
