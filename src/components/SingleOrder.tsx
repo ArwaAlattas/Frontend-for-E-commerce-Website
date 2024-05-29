@@ -98,7 +98,7 @@ function SingleOrder(props: { order: Order }) {
         <TableCell align="center">
           {formattingDate(order.createdAt)}
         </TableCell>
-        <TableCell align="center">{order.amount}</TableCell>
+        <TableCell align="center">{order.amount.toFixed(2) ?? 0.00}</TableCell>
         <TableCell align="center">{order.products?.length} items</TableCell>
       </TableRow>
     </TableBody>
