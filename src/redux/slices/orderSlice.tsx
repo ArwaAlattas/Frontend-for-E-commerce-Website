@@ -42,12 +42,12 @@ export const createOrder = createAsyncThunk(
       formData.append("productIds", product.productID);
     });
 
-    console.log([...formData]); // For debugging, log the FormData entries
+    console.log([...formData]); 
 
     const response = await api.post("/orders", formData, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
-        'Content-Type': 'multipart/form-data' // Important for FormData
+        'Content-Type': 'multipart/form-data' 
       }
     });
     

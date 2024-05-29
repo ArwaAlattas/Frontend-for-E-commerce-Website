@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { TableBody, TableCell, TableRow } from "@mui/material"
@@ -11,12 +10,11 @@ import { fetchUsers } from "@/redux/slices/userSlice"
 import { fetchProducts } from "@/redux/slices/productSlice"
 import useProductState from "@/hooks/ProductState"
 
-
-function SingleOrder(props: { order:Order}) {
-  const { order} = props
+function SingleOrder(props: { order: Order }) {
+  const { order } = props
   const { products } = useProductState()
-  const { users} = useUserState()
- 
+  const { users } = useUserState()
+
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber] = useState(1)
   const [pageSize] = useState(10)
@@ -34,9 +32,49 @@ function SingleOrder(props: { order:Order}) {
     fetchData()
   }, [])
 
+  const nameOfStatus = (statusNumber: number|undefined) => {
+    switch (statusNumber) {
+      case 0:
+        return "Creating"
+      case 1:
+        return "Pending"
+      case 2:
+        return "Processing"
+      case 3:
+        return "Shipped"
+      case 4:
+        return "Delivered"
+    }
+  }
+  //public enum PaymentMethod { CreditCard = 0, ApplePay = 1, Visa = 2, Cash = 3, PayPal = 4 };
+  const nameOfPaymentMethod = (statusNumber: number|undefined) => {
+    switch (statusNumber) {
+      case 0:
+        return "CreditCard"
+      case 1:
+        return "ApplePay"
+      case 2:
+        return "Visa"
+      case 3:
+        return "Cash"
+      case 4:
+        return "PayPal"
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchProducts({ pageNumber, pageSize, keyword, sortBy, isAscending, selectedCategories ,minPrice,maxPrice}))
+      await dispatch(
+        fetchProducts({
+          pageNumber,
+          pageSize,
+          keyword,
+          sortBy,
+          isAscending,
+          selectedCategories,
+          minPrice,
+          maxPrice
+        })
+      )
     }
     fetchData()
   }, [pageNumber, keyword, sortBy, isAscending])
@@ -50,12 +88,12 @@ function SingleOrder(props: { order:Order}) {
         <TableCell sx={{ fontWeight: "medium", fontSize: 16 }} component="th" scope="row">
           {order.orderId}
         </TableCell>
-        <TableCell align="center">{order.status}</TableCell>
-        <TableCell align="center">{order.payment}</TableCell>
+        <TableCell align="center">{nameOfStatus(order.status)}</TableCell>
+        <TableCell align="center">{nameOfPaymentMethod(order.payment)}</TableCell>
         <TableCell align="center">
-          {/* {order.userId && users && users.find(u=> u.userID === order.userId)?.username} */}
+          {/* {users &&  users.find(u=> u.userID === order.userId)?.username} */}
           {order.userId}
-          </TableCell>
+        </TableCell>
         <TableCell align="center">{order.createdAt}</TableCell>
         <TableCell align="center">{order.products?.length}</TableCell>
       </TableRow>
