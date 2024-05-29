@@ -37,8 +37,8 @@ function AdminOrdersManagement() {
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center" >Order Id</TableCell>
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">Status</TableCell>
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">Payment Methods</TableCell>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">User Name</TableCell>
-                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center">Added date</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }} align="center">User Id</TableCell>
+                <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center">Total Amount</TableCell>
                 <TableCell sx={{fontSize: 18, fontWeight: 'medium' }}align="center">Products</TableCell>
               </TableRow>
             </TableHead>

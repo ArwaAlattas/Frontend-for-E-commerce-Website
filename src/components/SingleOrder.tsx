@@ -94,7 +94,7 @@ function SingleOrder(props: { order: Order }) {
           {/* {users &&  users.find(u=> u.userID === order.userId)?.username} */}
           {order.userId}
         </TableCell>
-        <TableCell align="center">{order.createdAt}</TableCell>
+        <TableCell align="center">{order.amount}</TableCell>
         <TableCell align="center">{order.products?.length}</TableCell>
       </TableRow>
     </TableBody>
