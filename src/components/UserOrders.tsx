@@ -1,4 +1,3 @@
-import AdminSidebar from "@/components/AdminSideBar"
 import{ useEffect } from "react"
 import PageTitle from "./PageTitle"
 import useOrderState from "@/hooks/OrderState"
@@ -7,6 +6,7 @@ import { AppDispatch } from "@/redux/store"
 import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import SingleOrder from "./SingleOrder"
 import { fetchUserOrders } from "@/redux/slices/orderSlice"
+import UserSideBar from "./UserSideBar"
 
 function UserOrders() {
 
@@ -22,7 +22,7 @@ function UserOrders() {
 
   return (
     <div className="flex-space-around">
-      <AdminSidebar />
+   <UserSideBar />
       <div className="main-container">
         <h1 className="text-2xl uppercase mb-1">All orders</h1>
         <PageTitle title="Orders" />
