@@ -10,30 +10,51 @@ const initialState: OrderState = {
   isLoading: false
 }
 
+// export const createOrder = createAsyncThunk(
+//   "orders/createOrder",
+//   async ({ cartItems, paymentMethod }: { cartItems: CartItem[], paymentMethod: number }) => {
+//     const params = new URLSearchParams({
+//       paymentMethod:paymentMethod.toString()
+//     })
+   
+//     cartItems.forEach((product) => {
+//       params.append("productIds", product.productID)
+//     })
+
+//     console.log(params.toString())
+
+//     const response = await api.post("/orders", params, {
+//       headers: {
+//         Authorization: `Bearer ${getToken()}`
+//       }
+//     })
+//     console.log(response.data)
+//     return response.data
+//   }
+// )
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
   async ({ cartItems, paymentMethod }: { cartItems: CartItem[], paymentMethod: number }) => {
-    const params = new URLSearchParams({
-      paymentMethod:paymentMethod.toString()
-    })
-    // if (paymentMethod !== undefined) {
-    //   params.append("paymentMethod", paymentMethod.toString())
-    // }
+    const formData = new FormData();
+    formData.append("paymentMethod", paymentMethod.toString());
+
     cartItems.forEach((product) => {
-      params.append("productIds", product.productID)
-    })
+      formData.append("productIds", product.productID);
+    });
 
-    console.log(params.toString())
+    console.log([...formData]); // For debugging, log the FormData entries
 
-    const response = await api.post("/orders", params, {
+    const response = await api.post("/orders", formData, {
       headers: {
-        Authorization: `Bearer ${getToken()}`
+        Authorization: `Bearer ${getToken()}`,
+        'Content-Type': 'multipart/form-data' // Important for FormData
       }
-    })
-    console.log(response.data)
-    return response.data
+    });
+    
+    console.log(response.data);
+    return response.data;
   }
-)
+);
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async () => {
