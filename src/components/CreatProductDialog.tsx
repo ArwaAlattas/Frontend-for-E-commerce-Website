@@ -68,8 +68,8 @@ export default function CreateProductDialog() {
         imgUrl: imageUrl
       }
 
-      const response = await dispatch(createProduct(productData))
-      toastSuccess(response.payload.message)
+       await dispatch(createProduct(productData))
+      toastSuccess("product created successfully")
     } catch (error: unknown) {
       if (error instanceof Error) {
         toastError(`An error occurred: ${error.message}`);
