@@ -53,25 +53,7 @@ function AdminOrdersManagement() {
               ))}
           </Table>
         </TableContainer>
-        {/* <div className="pagination-section flex gap-1 mt-8">
-          <Button
-            onClick={() => setPageNumber((currentPage) => currentPage - 1)}
-            disabled={pageNumber === 1}
-          >
-            Previous
-          </Button>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <Button key={index} onClick={() => setPageNumber(index + 1)}>
-              {index + 1}
-            </Button>
-          ))}
-          <Button
-            onClick={() => setPageNumber((currentPage) => currentPage + 1)}
-            disabled={pageNumber === totalPages}
-          >
-            Next
-          </Button>
-        </div> */}
+    
       </div>
     </div>
   )

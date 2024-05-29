@@ -4,7 +4,7 @@ import useUserState from "@/hooks/UserState"
 import { updateUser } from "@/redux/slices/userSlice"
 import { AppDispatch } from "@/redux/store"
 import { UpdateProfileFormData } from "@/types"
-import { toastError, toastSuccess } from "@/utils/toast"
+import { toastError} from "@/utils/toast"
 import React, { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
@@ -49,8 +49,6 @@ function UserProfile() {
               <Button onClick={() => setIsFormOpen(!isFormOpen)}>
                 {isFormOpen ? "Close Edit Profile " : "EditUser Profile "}
               </Button>
-
-              <Button variant="delete">Delete My acount</Button>
             </div>
             {isFormOpen && (
               <form onSubmit={handleSubmit(onSubmit)} className="update-form">

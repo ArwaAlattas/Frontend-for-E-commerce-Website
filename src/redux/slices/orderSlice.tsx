@@ -47,6 +47,19 @@ export const fetchOrders = createAsyncThunk(
   }
 )
 
+export const fetchUserOrders = createAsyncThunk(
+  "orders/fetchUserOrders",
+  async () => {
+    const response =  await api.get(`/orders/my-orders`,{
+      headers:{
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+    console.log(response.data)
+    return response.data
+  }
+)
+
 const orderSlice = createSlice({
   name: "orders",
   initialState: initialState,
@@ -56,7 +69,12 @@ const orderSlice = createSlice({
       state.orders = action.payload.data
       state.isLoading = false
     })
-  
+
+      builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
+        state.orders = action.payload.data
+        state.isLoading = false
+      })
+
     builder.addMatcher(
       (action) => action.type.endsWith("/pending"),
       (state) => {

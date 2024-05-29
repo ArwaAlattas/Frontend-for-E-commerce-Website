@@ -48,7 +48,7 @@ export default function Login() {
       console.log("Response from Register:" + response)
     const isAdmin = response.payload.data.loggedInUser.isAdmin;
       toastSuccess(response.payload.message)
-      navigate(isAdmin? "/dashboard/admin/products":"/dashboard/user/profile")
+      navigate(isAdmin? "/dashboard/admin/products":"/")
     } catch (error: any) {
       toastError(error.message || "Login failed")
     }
