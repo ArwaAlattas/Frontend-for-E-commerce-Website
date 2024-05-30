@@ -69,10 +69,9 @@ export default function CreateProductDialog() {
       }
 console.log(productData)
       const response = await dispatch(createProduct(productData))
-      toastSuccess(response.payload.message)
+      toastSuccess("Product creation Successfully")
     } catch (error: any) {
         toastError("Product creation failed");
-    
     }
     setOpen(false)
   }
