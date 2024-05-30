@@ -79,9 +79,17 @@ export default function CreateProductDialog() {
 
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+    // const file = e.target.files?.[0]
+    // if (file) {
+    //   setImagePreview(URL.createObjectURL(file))
+    // }
+    const file = e.target.files?.[0];
     if (file) {
-      setImagePreview(URL.createObjectURL(file))
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   }
   useEffect(() => {
@@ -216,20 +224,6 @@ export default function CreateProductDialog() {
                                 />
                               </Grid>
                               <Grid item xs={12}>
-                                {/* <TextField
-                                  {...register("categoryId", {
-                                    required: "categoryId is required"
-                                  })}
-                                  error={Boolean(errors.categoryId)}
-                                  fullWidth
-                                  required
-                                  name="categoryId"
-                                  label="categoryId"
-                                  type="text"
-                                  id="categoryId"
-                                  autoComplete="categoryId"
-                                  helperText={errors.categoryId?.message}
-                                /> */}
                                 <Controller
                                   name="categoryId"
                                   control={control}

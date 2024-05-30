@@ -114,8 +114,7 @@ export type UpdateCategoryFormData = {
 export type Cart = {
   cartID: string
 }
-//  enum OrderStatus { Creating = 0, Pending = 1, Processing = 2, Shipped = 3, Delivered = 4 }
-//  enum PaymentMethod { CreditCard = 0, ApplePay = 1, Visa = 2, Cash = 3, PayPal = 4 }
+
 export type Order = {
   orderId: string
   status?:number

@@ -154,7 +154,7 @@ const productSlice = createSlice({
     builder.addMatcher(
       (action) => action.type.endsWith("/rejected"),
       (state, action) => {
-        state.error = "An error occured"
+        state.error = "An error occurred"
         state.isLoading = false
       }
     )
