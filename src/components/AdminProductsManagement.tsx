@@ -19,7 +19,7 @@ const AdminProductsManagement = () => {
   const { products, isLoading, error, totalPages } = useProductState()
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber] = useState(1)
-  const [pageSize] = useState(40)
+  const [pageSize] = useState(30)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
   const [isAscending, setIsAscending] = useState("true")
