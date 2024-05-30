@@ -68,7 +68,7 @@ export default function CreateProductDialog() {
         imgUrl: imageUrl
       }
 console.log(productData)
-      const response = await dispatch(createProduct(productData))
+   await dispatch(createProduct(productData))
       toastSuccess("Product creation Successfully")
     } catch (error: any) {
         toastError("Product creation failed");
