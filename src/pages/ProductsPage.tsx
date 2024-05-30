@@ -52,7 +52,7 @@ const Products = () => {
       )
     }
     fetchData()
-  }, [pageNumber, keyword, sortBy, isAscending, selectedCategories, minPrice, maxPrice])
+  }, [pageNumber,pageSize, keyword, sortBy, isAscending, selectedCategories, minPrice, maxPrice])
 
   useEffect(() => {
     const fetchData = async () => {
