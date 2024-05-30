@@ -61,18 +61,22 @@ export default function CreateProductDialog() {
       let imageUrl = " "
       if (data.imgUrl && data.imgUrl.length > 0) {
         const file = data.imgUrl[0]
+        console.log('Uploading file:', file);
         imageUrl = await uploadImageToCloudinary(file)
+        console.log('Image URL:', imageUrl); 
       }
 
       const productData = {
         ...data,
         imgUrl: imageUrl
       }
-
+console.log(productData)
     await dispatch(createProduct(productData))
       toastSuccess("Product creation Successfully")
     } catch (error: any) {
         toastError("Product creation failed");
+        console.error('Error creating product:', error); // Add this log
+      
     }
     setOpen(false)
   }
@@ -84,13 +88,12 @@ export default function CreateProductDialog() {
     //   setImagePreview(URL.createObjectURL(file))
     // }
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+  if (file) {
+    console.log('File selected:', file); 
+    setImagePreview(URL.createObjectURL(file));
+  } else {
+    console.log('No file selected'); 
+  }
   }
   useEffect(() => {
     const fetchData = async () => {
