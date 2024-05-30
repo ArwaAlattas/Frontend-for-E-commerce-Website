@@ -18,8 +18,8 @@ const AdminProductsManagement = () => {
 
   const { products, isLoading, error, totalPages } = useProductState()
   const dispatch: AppDispatch = useDispatch()
-  const [pageNumber] = useState(1)
-  const [pageSize] = useState(30)
+  const [pageNumber,setPageNumber] = useState(1)
+  const [pageSize] = useState(10)
   const [keyword, setKeyword] = useState("")
   const [sortBy, setSortBy] = useState<string>("name")
   const [isAscending, setIsAscending] = useState("true")
@@ -33,7 +33,7 @@ const AdminProductsManagement = () => {
       await dispatch(fetchProducts({ pageNumber, pageSize, keyword, sortBy, isAscending, selectedCategories ,minPrice,maxPrice}))
     }
     fetchData()
-  }, [pageNumber,pageSize, keyword, sortBy, isAscending, selectedCategories, minPrice, maxPrice,products])
+  }, [pageNumber,pageSize, keyword, sortBy, isAscending, selectedCategories, minPrice, maxPrice])
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault
@@ -139,7 +139,7 @@ const AdminProductsManagement = () => {
               ))}
           </Table>
         </TableContainer>
-        {/* <div className="pagination-section flex gap-1 mt-8">
+        <div className="pagination-section flex gap-1 mt-8">
           <Button
             onClick={() => setPageNumber((currentPage) => currentPage - 1)}
             disabled={pageNumber === 1}
@@ -157,7 +157,7 @@ const AdminProductsManagement = () => {
           >
             Next
           </Button>
-        </div> */}
+        </div>
       </div>
     </div>
   )
