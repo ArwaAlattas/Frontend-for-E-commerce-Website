@@ -33,7 +33,7 @@ const AdminProductsManagement = () => {
       await dispatch(fetchProducts({ pageNumber, pageSize, keyword, sortBy, isAscending, selectedCategories ,minPrice,maxPrice}))
     }
     fetchData()
-  }, [pageNumber,pageSize, keyword, sortBy, isAscending, selectedCategories, minPrice, maxPrice])
+  }, [pageNumber,pageSize, keyword, sortBy, isAscending])
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault
