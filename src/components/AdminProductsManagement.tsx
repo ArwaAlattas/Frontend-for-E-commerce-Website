@@ -65,7 +65,7 @@ const AdminProductsManagement = () => {
       <Adminsidebar />
       <div className="main-container">
         <h1 className="text-2xl uppercase ">Products</h1>
-        <PageTitle title="Categories" />
+        <PageTitle title="Products" />
 
         {isLoading && <p>Loading ... </p>}
         {error && <p className="text-red-500">Error{error}</p>}
