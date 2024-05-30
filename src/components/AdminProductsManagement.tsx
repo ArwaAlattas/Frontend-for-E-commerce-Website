@@ -66,7 +66,6 @@ const AdminProductsManagement = () => {
       <div className="main-container">
         <h1 className="text-2xl uppercase ">Products</h1>
         <PageTitle title="Products" />
-
         {isLoading && <p>Loading ... </p>}
         {error && <p className="text-red-500">Error{error}</p>}
 
@@ -134,7 +133,6 @@ const AdminProductsManagement = () => {
                   key={product.productID}
                   product={product}
                   totalPage={totalPages}
-  
                 />
               ))}
           </Table>

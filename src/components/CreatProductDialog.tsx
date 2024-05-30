@@ -36,7 +36,7 @@ const theme = createTheme({
 
 export default function CreateProductDialog() {
   const [pageNumber] = useState(1)
-  const [pageSize] = useState(10)
+  const [pageSize] = useState(20)
   const [keyword] = useState("")
   const [sortBy] = useState<string>("name")
   const [isAscending] = useState("true")
@@ -46,6 +46,7 @@ export default function CreateProductDialog() {
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const { categories } = useCategoryState()
 // const watchedCategoryIds = watch("categoryId")
+
   const {
     register,
     handleSubmit,
@@ -67,8 +68,8 @@ export default function CreateProductDialog() {
         ...data,
         imgUrl: imageUrl
       }
-console.log(productData)
-   await dispatch(createProduct(productData))
+
+    await dispatch(createProduct(productData))
       toastSuccess("Product creation Successfully")
     } catch (error: any) {
         toastError("Product creation failed");
