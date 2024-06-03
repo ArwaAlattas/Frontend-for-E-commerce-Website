@@ -75,10 +75,11 @@ console.log(productData)
       toastSuccess("Product creation Successfully")
     } catch (error: any) {
         toastError("Product creation failed");
-        console.error('Error creating product:', error); // Add this log
+        console.error('Error creating product:', error); 
       
-    }
-    setOpen(false)
+      } finally {
+        setOpen(false); 
+      }
   }
 
 
